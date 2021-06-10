@@ -8,19 +8,31 @@ const express = require("express");
 const ws = require("express-ws");
 const pty = require("node-pty");
 
-// Initialize module at 100 requests per 10 seconds:
-var rateLimit = require('ws-rate-limit')(100, '10s')
-
 const app = express();
 let ips = [];
+
+const supported_commands = [
+  "sh",
+  "python3",
+  "python",
+  "python2"
+];
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
 ws(app);
 
 app.use(express.static("public/"))
+app.get("/meta/languages", (req, res) => res.json(supported_commands));
 
-app.ws("/ws", (ws, req) => {
+app.ws("/ws/:language", (ws, req) => {
+
+  let language = req.params.language || "python3";
+
+  if (!supported_commands.includes(language)) {
+    ws.send(`\nUnsupported language "${language}". Try one of: ${languages.join(", ")}.\n`)
+    return ws.close();
+  }
 
   const ip = req.headers['x-forwarded-for'];
   console.log(ip)
@@ -33,7 +45,7 @@ app.ws("/ws", (ws, req) => {
     ips.push(ip)
   }
 
-	const term = pty.spawn("python3", [], { name: "xterm-color" });
+	const term = pty.spawn(language, [], { name: "xterm-color" });
 
 	term.on("data", (data) => {
 

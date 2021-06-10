@@ -14,6 +14,19 @@ let messages = [];
 
 let timer = document.getElementById("timer");
 let button = document.getElementById("start-btn");
+const usp = new URLSearchParams(window.location.search);
+
+const current_language = usp.get('lang') || usp.get('language') || 'python3';
+
+const languages = document.getElementById("languages");
+const lang = document.getElementById("lang");
+
+lang.innerText = current_language;
+fetch("/meta/languages").then(r => r.json()).then(j => {
+
+  languages.innerHTML = j.map(l => `<a href="?language=${l}">${l}</a>`).join(", ")
+
+});
 
 function start() {
 
@@ -48,7 +61,7 @@ function start() {
   const socket = new WebSocket(
     `${document.location.protocol === "http:" ? "ws" : "wss"}://${
       document.location.host
-    }/ws`
+    }/ws/${current_language}`
   );
 
   const websocketAddon = new AttachAddon.AttachAddon(socket);

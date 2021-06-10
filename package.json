@@ -8,6 +8,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
     "express-ws": "^4.0.0",
     "node-pty": "^0.10.1",
     "ws-rate-limit": "^0.0.0"

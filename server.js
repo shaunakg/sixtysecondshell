@@ -18,7 +18,7 @@ app.ws("/ws", (ws) => {
 		try {
 			ws.send(data);
 		} catch (err) {
-			console.error(err)
+			ws.send(err)
 		}
 
 	});

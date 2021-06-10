@@ -8,6 +8,7 @@ let isTerminalOn = false;
 let timeLeft = 1;
 let totalTime = 60;
 let interval = null;
+let terminal = document.getElementById("terminal");
 
 let messages = [];
 
@@ -21,6 +22,7 @@ function start() {
   }
 
   isTerminalOn = true;
+  terminal.innerHTML = ""; // Clear if run twice.
   button.style.display = "none";
 
   timer.classList.remove("flashing");
@@ -55,7 +57,7 @@ function start() {
   term.loadAddon(websocketAddon);
   term.loadAddon(resizeAddon);
 
-  term.open(document.getElementById("terminal"));
+  term.open(terminal);
 
   resizeAddon.fit();
   window.addEventListener("resize", () => resizeAddon.fit());

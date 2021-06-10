@@ -54,9 +54,13 @@ app.ws("/ws", (ws, req) => {
 
 	setTimeout(() => {
 
-		ws.send("\n:) Your sixty seconds has expired. See you next time!\n")
-		term.kill()
-    return ws.close()
+    try {
+      ws.send("\n:) Your sixty seconds has expired. See you next time!\n")
+      term.kill()
+      return ws.close()
+    } catch (e) {
+      return console.warn("Unable to close websocket to " + ip + " after timeout, probably closed the page.")
+    }
 
 	}, 60 * 1e3); // session timeout
 

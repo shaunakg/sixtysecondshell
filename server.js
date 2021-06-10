@@ -25,7 +25,6 @@ app.ws("/ws", (ws) => {
 
 	ws.on("message", (data) => {	
 
-		console.log(data);
 		term.write(data);
 
 	});
@@ -40,7 +39,7 @@ app.ws("/ws", (ws) => {
 	setTimeout(() => {
 
 		ws.send("\n:) Your sixty seconds has expired. See you next time!\n")
-		ws.close([0])
+		ws.close(0, "Sixty seconds is over.")
 		term.kill()
 
 	}, 60 * 1e3); // session timeout

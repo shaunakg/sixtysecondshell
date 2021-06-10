@@ -11,7 +11,7 @@ ws(app);
 app.get("/", (req, res) => res.sendFile(`${__dirname}/index.html`));
 app.ws("/ws", (ws) => {
 
-	const term = pty.spawn("python", [], { name: "xterm-color" });
+	const term = pty.spawn("python3", [], { name: "xterm-color" });
 
 	term.on("data", (data) => {
 
@@ -23,12 +23,19 @@ app.ws("/ws", (ws) => {
 
 	});
 
-	ws.onopen(() => {
+	ws.on("message", (data) => {	
 
-		console.log("Connect")
-		ws.send("\nYour sixty seconds starts now.\n");
+		console.log(data);
+		term.write(data);
 
 	});
+
+	// ws.onopen(() => {
+
+	// 	console.log("Connect")
+	// 	ws.send("\nYour sixty seconds starts now.\n");
+
+	// });
 
 	setTimeout(() => {
 
@@ -37,13 +44,6 @@ app.ws("/ws", (ws) => {
 		term.kill()
 
 	}, 60 * 1e3); // session timeout
-
-	ws.on("message", (data) => {	
-
-		console.log(data);
-		term.write(data);
-
-	});
 
 });
 

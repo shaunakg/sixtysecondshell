@@ -10,14 +10,41 @@ ws(app);
 
 app.get("/", (req, res) => res.sendFile(`${__dirname}/index.html`));
 app.ws("/ws", (ws) => {
-  const term = pty.spawn("python3", [], { name: "xterm-color" });
-  setTimeout(() => term.kill(), 3600 * 1000); // session timeout
-  term.on("data", (data) => {
-    try {
-      ws.send(data);
-    } catch (err) {}
-  });
-  ws.on("message", (data) => term.write(data));
+
+	const term = pty.spawn("python", [], { name: "xterm-color" });
+
+	term.on("data", (data) => {
+
+		try {
+			ws.send(data);
+		} catch (err) {
+			console.error(err)
+		}
+
+	});
+
+	ws.onopen(() => {
+
+		console.log("Connect")
+		ws.send("\nYour sixty seconds starts now.\n");
+
+	});
+
+	setTimeout(() => {
+
+		ws.send("\n:) Your sixty seconds has expired. See you next time!\n")
+		ws.close([0])
+		term.kill()
+
+	}, 60 * 1e3); // session timeout
+
+	ws.on("message", (data) => {	
+
+		console.log(data);
+		term.write(data);
+
+	});
+
 });
 
-app.listen(parseInt(process.env.PORT), "0.0.0.0");
+app.listen(parseInt(process.env.PORT || 80), "0.0.0.0");

@@ -9,6 +9,10 @@ const ws = require("express-ws");
 const pty = require("node-pty");
 
 const app = express();
+app.use(require('cors')({
+  origin: "https://sixtysecondsofpython.srg.id.au"
+}))
+
 let ips = [];
 
 const supported_commands = [
@@ -22,7 +26,6 @@ const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 :
 
 ws(app);
 
-app.use(express.static("public/"))
 app.get("/meta/languages", (req, res) => res.json(supported_commands));
 
 app.ws("/ws/:language", (ws, req) => {
@@ -57,6 +60,15 @@ app.ws("/ws/:language", (ws, req) => {
 		}
 
 	});
+
+  term.on("exit", (data) => {
+
+    try {
+      ws.send("\n\nTerminal has exited. Your session has ended.")
+      return ws.close()
+    } catch (err) {}
+
+  })
 
 	ws.on("message", (data) => {	
 

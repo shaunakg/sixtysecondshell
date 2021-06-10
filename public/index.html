@@ -1,0 +1,54 @@
+
+<!-- 
+
+Sixty Seconds of Python
+Under MIT Licence
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <title>sixty seconds of python</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/xterm@4.11.0/css/xterm.css"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+  </head>
+  <body>
+    
+    
+    <div class="container">
+
+      <h1>sixty seconds of python</h1>
+      <p>
+        Next to you is a terminal. Anything that you wish can happen. You can create or destroy - but it must be within sixty seconds. Are you up for the challenge?<br/><br/>
+
+        <i>Note: this terminal is a real live Python environment! You can do anything!</i>
+      </p>
+
+      <div id="timer" class="timer"></div>
+
+      <button id="start-btn" onclick="start()" class="cta btn">start</button>
+
+    </div>
+
+    <div id="terminal"></div>
+
+    <script src="https://unpkg.com/xterm@4.11.0/lib/xterm.js"></script>
+    <script src="https://unpkg.com/xterm-addon-attach@0.6.0/lib/xterm-addon-attach.js"></script>
+    <script src="https://unpkg.com/xterm-addon-fit@0.5.0/lib/xterm-addon-fit.js"></script>
+    <script src="script.js"></script>
+
+  </body>
+</html>

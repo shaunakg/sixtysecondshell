@@ -1,0 +1,60 @@
+
+/* 
+
+Sixty Seconds of Python
+Under MIT Licence
+
+ */
+
+body {
+  margin: 0; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+
+  flex-flow: row wrap;
+
+  min-height: 100vh;
+
+  font-family: 'Inter', system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+
+}
+
+div.container {
+  padding: 20px;
+  margin: 40px;
+
+  max-width: 500px;
+}
+
+div.timer {
+  width: 100%;
+  padding: 0; margin: 0;
+  height: 20px;
+
+  border-radius: 2px;
+  background-color: coral;
+
+  margin-bottom: 20px;
+  transition: width 0.25s, height 2s;
+}
+
+div.timer.flashing {
+  animation: blinker 0.5s infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
+i {
+  font-size: 0.8rem;
+}
+
+.cta.btn {
+  background-color: #414073;
+  color: white;
+  font-family: 'Inter';
+  border: none;
+  padding: 7px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}

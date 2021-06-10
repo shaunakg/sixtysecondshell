@@ -63,6 +63,18 @@ cookie@0.4.0:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
 
+css-duration@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/css-duration/-/css-duration-0.2.0.tgz#3864259f69239fb02ba728c34aa809be6294a717"
+  integrity sha1-OGQln2kjn7ArpyjDSqgJvmKUpxc=
+  dependencies:
+    css-strip-units "^1.0.0"
+
+css-strip-units@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/css-strip-units/-/css-strip-units-1.0.0.tgz#1b8319039e4b4e664676c383dc89cc0af8c87a11"
+  integrity sha1-G4MZA55LTmZGdsOD3InMCvjIehE=
+
 debug@2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -390,6 +402,13 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
+ws-rate-limit@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/ws-rate-limit/-/ws-rate-limit-0.0.0.tgz#1376205b01d6e84f9fd679d5295ef9728df41971"
+  integrity sha1-E3YgWwHW6E+f1nnVKV75co30GXE=
+  dependencies:
+    css-duration "^0.2.0"
 
 ws@^5.2.0:
   version "5.2.3"

@@ -1,5 +1,17 @@
-# Welcome to 60 seconds of Python
+# Welcome to Sixty Seconds Of Python
 ***This is a deriviative work based on @raxod502's [python-in-a-box](https://github.com/raxod502/python-in-a-box), packaged with the same open-source license.***
+
+## What is this?
+- This is a small server that gives you 60 seconds of various shells to try out.
+- It's not a complex project and it's based off python-in-a-box which is only around 20 LOC, so it doesn't have isolation between clients.
+- It is designed to run on PaaS infrastructure like Heroku and not a VPC or individual server, and it relies on getting wiped regularly.
+- That being said, pull requests to implement isolation for clients would be appriciated.
+
+## Where is the front end?
+- The front-end is located [here](https://github.com/shaunakg/sixty-seconds-of-python-frontend).
+- The server does not serve the front end because people who run shells on the server would then be able to inject arbitrary code into the front end, which is undesireable. It's fine if they do it on the server because Heroku will wipe it in a few minutes.
+
+
 
 ### Original README from [python-in-a-box](https://github.com/raxod502/python-in-a-box) (note that code statistics are now obviously outdated)
 

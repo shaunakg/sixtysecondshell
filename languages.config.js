@@ -41,6 +41,12 @@ const langs = [
         name: "MySQL",
         script: "./langs/mysql",
         description: "MySQL is the world's most popular open source database. You'll be connected to the public ensembl.org database of the human genome."
+    },
+
+    {
+        name: "PHP",
+        script: "./langs/php",
+        description: "PHP is a programming language primarily used for web development."
     }
 
 ]

@@ -3,4 +3,5 @@
 ## See ./python for comments
 ## This file will launch a MySQL container with a MySQL interactive shell running
 
+## NOTE: This is the only language that does NOT contain network restrictions.
 docker run --rm -it mysql mysql -hensembldb.ensembl.org -uanonymous

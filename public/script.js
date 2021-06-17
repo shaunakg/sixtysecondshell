@@ -9,7 +9,7 @@
 const usp = new URLSearchParams(window.location.search);
 
 // Specify custom API with ?useAPI=https://my-api-host.com
-const apiHost = usp.get("useAPI") || ""
+const apiHost = usp.get("useAPI") || window.location.hostname
 
 let isTerminalOn = false;
 let timeLeft = 1;

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo Resetting git repo and pulling new files...
-sh ./pull.sh
+sh ./scripts/pull.sh
 
 echo Building and starting container...
-sh ./build-and-start.sh
+sh ./scripts/build-and-start.sh

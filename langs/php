@@ -3,4 +3,4 @@
 ## See ./python for comments
 ## This file will launch a Docker container with a Java interactive shell running
 
-docker run --rm -it --network none php php
+docker run --rm -it --network none php php -a

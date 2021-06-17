@@ -34,6 +34,8 @@ fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r
 
   j.forEach(lang => {
 
+    langLi = document.createElement("li")
+
     langLink = document.createElement("a");
     langLink.innerText = lang.name;
     langLink.href = `?language=${encodeURIComponent(lang.name)}&useAPI=${encodeURIComponent(apiHost)}`;
@@ -41,7 +43,8 @@ fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r
 
     langLink.classList.add("language-link")
 
-    languages.appendChild(langLink);
+    langLi.appendChild(langLink)
+    languages.appendChild(langLi);
     
   });
 
@@ -65,6 +68,8 @@ fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r
   document.getElementById("loading-languages").style.display = "none";
 
 }).catch(error => {
+
+  document.getElementById("loading-languages").style.display = "none";
 
   console.error(error);
   languages.innerHTML = "<span style='color:red'>[error]</span>";

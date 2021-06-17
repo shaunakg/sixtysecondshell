@@ -35,6 +35,12 @@ const langs = [
         name: "Java",
         script: "./langs/java",
         description: "[Wikipedia] Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible."
+    },
+
+    {
+        name: "MySQL",
+        script: "./langs/mysql",
+        description: "MySQL is the world's most popular open source database. You can't actually run database commands here, but try playing around with it!"
     }
 
 ]

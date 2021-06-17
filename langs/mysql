@@ -1,0 +1,6 @@
+#!/bin/sh
+
+## See ./python for comments
+## This file will launch a MySQL container with a MySQL interactive shell running
+
+docker run --rm -it --network none mysql mysql 

@@ -2,7 +2,10 @@
 #!/bin/bash
 
 ## Build docker image
-BUILD_ID = $(sudo docker build .)
+echo "Building image..."
+BUILD_ID=$(sudo docker build -q .)
+echo "Built with ID ${BUILD_ID}"
 
 ## Run image
-sudo docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 "${BUILD_ID}"
+echo "Running image in container..."
+$(sudo docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 ${BUILD_ID})

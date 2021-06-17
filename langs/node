@@ -1,0 +1,6 @@
+#!/bin/sh
+
+## See ./python for comments
+## This file will launch a Docker container with NodeJS interactive shell running
+
+docker run -it --network none node node

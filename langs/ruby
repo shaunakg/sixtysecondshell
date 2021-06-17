@@ -1,0 +1,6 @@
+#!/bin/sh
+
+## See ./python for comments
+## This file will launch a Docker container with Ruby interactive shell running
+
+docker run -it --network none ruby irb

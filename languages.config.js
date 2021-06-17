@@ -17,6 +17,18 @@ const langs = [
         name: "Bash",
         script: "./langs/bash",
         description: "Bash is the default shell on most Linux systems. This is good if you want to explore, but not that great for general programming."
+    },
+
+    {
+        name: "Ruby",
+        script: "./langs/ruby",
+        description: "[Wikipedia] Ruby is an interpreted, high-level, general-purpose programming language."
+    },
+
+    {
+        name: "Node.JS",
+        script: "./langs/node",
+        description: "Node.JS is a popular langauge for writing web servers and programs. Note: We have temporarily disabled internet access on our containers, and you may not be able to access some modules."
     }
 
 ]

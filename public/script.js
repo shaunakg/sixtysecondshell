@@ -7,6 +7,8 @@
 // THIS ASSUMES A LOCAL SERVER ON /, CHECK https://sixtysecondsofpython.srg.id.au/ FOR REAL SITE
 
 const usp = new URLSearchParams(window.location.search);
+
+// Specify custom API with ?useAPI=https://my-api-host.com
 const apiHost = usp.get("useAPI") || ""
 
 let isTerminalOn = false;
@@ -26,7 +28,7 @@ const languages = document.getElementById("languages");
 const lang = document.getElementById("lang");
 
 lang.innerText = current_language;
-fetch("https://" + apiHost + "/meta/languages").then(r => r.json()).then(j => {
+fetch(apiHost + "/meta/languages").then(r => r.json()).then(j => {
 
   languages.innerHTML = j.map(l => `<a href="?language=${l}&useAPI=${apiHost}">${l}</a>`).join(", ");
   if (!j.includes(current_language)) {

@@ -1,6 +1,6 @@
 # Use the official lightweight Node.js 14 image.
 # https://hub.docker.com/_/node
-FROM node:current
+FROM alpine
 
 # Create and change to the app directory.
 WORKDIR /usr/src/app
@@ -10,10 +10,15 @@ WORKDIR /usr/src/app
 # Copying this first prevents re-running npm install on every code change.
 COPY package*.json ./
 
+# Install node.js
+RUN apk add nodejs
+
+# Install Docker, this will be used to host the REPLs
+RUN apk add docker
+
 # Install production dependencies.
 # If you add a package-lock.json, speed your build by switching to 'npm ci'.
 # RUN npm ci --only=production
-
 RUN npm install --only=production
 
 # Copy local code to the container image.

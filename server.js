@@ -9,6 +9,8 @@ const ws = require("express-ws");
 const pty = require("node-pty");
 
 const app = express();
+app.use(express.static("public/"))
+
 app.use(require('cors')({
   origin: "https://sixtysecondsofpython.srg.id.au"
 }))
@@ -29,27 +31,29 @@ app.use(limiter);
 
 let ips = [];
 
-const supported_commands = [
-  "sh",
-  "python3",
-  "python",
-  "python2"
-];
+const supported_commands = {
+
+  python: "sudo docker run -it python python",
+  bash: "sudo docker run -it alpine bash"
+
+};
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
 ws(app);
 
-app.get("/meta/languages", (req, res) => res.json(supported_commands));
+app.get("/meta/languages", (req, res) => res.json(Object.keys(supported_commands)));
 
 app.ws("/ws/:language", (ws, req) => {
 
-  let language = req.params.language || "python3";
+  let language = req.params.language || "python";
 
-  if (!supported_commands.includes(language)) {
+  if (!Object.keys(supported_commands).includes(language)) {
     ws.send(`\nUnsupported language "${language}". Try one of: ${languages.join(", ")}.\n`)
     return ws.close();
   }
+
+  let command = supported_commands[language];
 
   const ip = req.headers['x-forwarded-for'];
   console.log(ip)
@@ -62,7 +66,7 @@ app.ws("/ws/:language", (ws, req) => {
     ips.push(ip)
   }
 
-	const term = pty.spawn(language, [], { name: "xterm-color" });
+	const term = pty.spawn(command, [], { name: "xterm-color" });
 
 	term.on("data", (data) => {
 

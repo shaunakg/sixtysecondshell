@@ -86,6 +86,8 @@ function start() {
   }
 
   isTerminalOn = true;
+
+  terminal.classList.remove("inactive");
   terminal.innerHTML = ""; // Clear if run twice.
   button.style.display = "none";
 
@@ -145,6 +147,7 @@ function start() {
   }
 
   socket.onopen = () => {
+
     const websocketAddon = new AttachAddon.AttachAddon(socket);
     const resizeAddon = new FitAddon.FitAddon();
 

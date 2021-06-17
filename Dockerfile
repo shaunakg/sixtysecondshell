@@ -20,7 +20,8 @@ COPY package*.json ./
 RUN apk add nodejs npm python3 docker build-base iptables
 
 # Disable access to EC2 instance metadata
-RUN iptables -t nat -I PREROUTING -p tcp -d 169.254.169.254 --dport 80 -j DNAT --to-destination 1.1.1.1
+# Currently broken - temp. solution is to disable container network access 
+# RUN iptables -t nat -I PREROUTING -p tcp -d 169.254.169.254 --dport 80 -j DNAT --to-destination 1.1.1.1
 
 # Install production dependencies.
 # If you add a package-lock.json, speed your build by switching to 'npm ci'.

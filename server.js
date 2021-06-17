@@ -87,7 +87,6 @@ app.ws("/ws/:language", (ws, req) => {
 			ws.send(data);
 		} catch (err) {
       console.error(err)
-			ws.send(err)
 		}
 
 	});
@@ -99,7 +98,7 @@ app.ws("/ws/:language", (ws, req) => {
       ws.send("__TERMEXIT");
       clearTimeout(timeout);
       return ws.close();
-    } catch (err) {}
+    } catch (err) { console.error(err) }
 
   })
 
@@ -115,7 +114,7 @@ app.ws("/ws/:language", (ws, req) => {
       ws.send("\n:) Your sixty seconds has expired. See you next time!\n")
       ws.send("__TERMEXIT");
       term.kill()
-      return ws.close()
+      return ws.close();
     } catch (e) {
       return console.warn("Unable to close websocket to " + ip + " after timeout, probably closed the page.")
     }

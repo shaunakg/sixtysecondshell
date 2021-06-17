@@ -3,4 +3,4 @@
 ## See ./python for comments
 ## This file will launch a MySQL container with a MySQL interactive shell running
 
-docker run --rm -it mysql mysql -hasiadb.ensembl.org -uanonymous
+docker run --rm -it mysql mysql -hensembldb.ensembl.org -uanonymous

@@ -47,6 +47,12 @@ const langs = [
         name: "PHP",
         script: "./langs/php",
         description: "PHP is a programming language primarily used for web development."
+    },
+
+    {
+        name: "Perl",
+        script: "./langs/perl",
+        description: "Perl is a high-level, general-purpose, interpreted, dynamic programming language."
     }
 
 ]

@@ -61,6 +61,7 @@ fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r
   }
 
 }).catch(error => {
+  console.error(error);
   languages.innerHTML = "<span style='color:red'>[error]</span>";
 })
 

@@ -1,3 +1,5 @@
+![Screenshot of SSOP](https://user-images.githubusercontent.com/28996247/122406053-e60b3a80-cfc3-11eb-935c-45426162cec9.png)
+
 # Welcome to Sixty Seconds Of Python
 
 ## What is this?

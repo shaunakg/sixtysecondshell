@@ -30,6 +30,7 @@ const lang = document.getElementById("lang");
 lang.innerText = current_language;
 fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r.json()).then(j => {
 
+  document.getElementById("howmany").innerText = j.length;
   const names = j.map( l => l.name );
 
   j.forEach(lang => {

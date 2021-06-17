@@ -11,6 +11,11 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install nodejs, npm, python3, build-base and docker as dependencies for our program
+# NodeJS - Runs the actual server
+# NPM - for dependencies that the server needs
+# python3 - Required for node-tty, won't be exposed to the user.
+# build-base - Required for node-tty
+# docker - hosts the containers
 RUN apk add nodejs npm python3 docker build-base
 
 # Install production dependencies.

@@ -28,7 +28,7 @@ const langs = [
     {
         name: "Node.JS",
         script: "./langs/node",
-        description: "Node.JS is a popular langauge for writing web servers and programs. Note: We have temporarily disabled internet access on our containers, and you may not be able to access some modules."
+        description: "Node.JS is a popular language for writing web servers and programs. Note: We have temporarily disabled internet access on our containers, and you may not be able to access some modules."
     }
 
 ]

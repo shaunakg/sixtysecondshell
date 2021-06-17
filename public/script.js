@@ -28,7 +28,7 @@ const languages = document.getElementById("languages");
 const lang = document.getElementById("lang");
 
 lang.innerText = current_language;
-fetch(apiHost + "/meta/languages").then(r => r.json()).then(j => {
+fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r.json()).then(j => {
 
   languages.innerHTML = j.map(l => `<a href="?language=${l}&useAPI=${apiHost}">${l}</a>`).join(", ");
   if (!j.includes(current_language)) {

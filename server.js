@@ -68,13 +68,14 @@ app.ws("/ws/:language", (ws, req) => {
 
     term.kill();
     ws.send(`\nTo prevent abuse of this service, we are limiting your IP address to ensure SSOP is available for everyone. This block will be lifted in around ten to fifteen minutes. [IP-LIMIT-${ip}]\n`);
+    ws.send("__TERMEXIT");
     clearTimeout(timeout);
     return ws.close();
 
   } else {
 
     ips.push(ip);
-    
+
   }
 
   console.log("Launching...")
@@ -95,6 +96,7 @@ app.ws("/ws/:language", (ws, req) => {
 
     try {
       ws.send("\n\nTerminal has exited. Your session has ended.")
+      ws.send("__TERMEXIT");
       clearTimeout(timeout);
       return ws.close();
     } catch (err) {}
@@ -111,6 +113,7 @@ app.ws("/ws/:language", (ws, req) => {
 
     try {
       ws.send("\n:) Your sixty seconds has expired. See you next time!\n")
+      ws.send("__TERMEXIT");
       term.kill()
       return ws.close()
     } catch (e) {

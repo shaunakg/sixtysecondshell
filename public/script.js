@@ -71,6 +71,14 @@ fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r
 
 })
 
+function done() {
+  clearInterval(interval);
+  timer.style.width = "100%";
+  timer.classList.add("flashing");
+  button.style.display = "inline-block";
+  isTerminalOn = false;
+}
+
 function start() {
 
   if (isTerminalOn) {
@@ -89,11 +97,7 @@ function start() {
   interval = setInterval(() => {
 
     if (timeLeft < 0) {
-      clearInterval(interval);
-      timer.style.width = "100%";
-      timer.classList.add("flashing");
-      button.style.display = "inline-block";
-      isTerminalOn = false;
+      return done();
     }
 
     timer.style.width = (timeLeft * 100) + "%";
@@ -151,6 +155,17 @@ function start() {
 
     resizeAddon.fit();
     window.addEventListener("resize", () => resizeAddon.fit());
+
+    socket.addEventListener("message", e => {
+
+      if (e.data == "__TERMEXIT") {
+
+        return done();
+
+      }
+
+    })
+
   }
 
 }

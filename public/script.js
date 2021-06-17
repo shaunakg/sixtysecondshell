@@ -39,6 +39,8 @@ fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r
     langLink.href = `?language=${encodeURIComponent(lang.name)}&useAPI=${encodeURIComponent(apiHost)}`;
     langLink.title = lang.description;
 
+    langLink.classList.add("language-link")
+
     languages.appendChild(langLink);
     
   });
@@ -60,9 +62,13 @@ fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r
 
   }
 
+  document.getElementById("loading-languages").style.display = "none";
+
 }).catch(error => {
+
   console.error(error);
   languages.innerHTML = "<span style='color:red'>[error]</span>";
+
 })
 
 function start() {

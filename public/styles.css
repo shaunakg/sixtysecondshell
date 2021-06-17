@@ -66,3 +66,9 @@ i {
   border-radius: 3px;
   cursor: pointer;
 }
+
+a.language-link {
+
+  margin: 0 3px;
+  
+}

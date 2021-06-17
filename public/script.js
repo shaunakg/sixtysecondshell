@@ -22,7 +22,7 @@ let messages = [];
 let timer = document.getElementById("timer");
 let button = document.getElementById("start-btn");
 
-const current_language = usp.get('lang') || usp.get('language') || 'python3';
+const current_language = usp.get('lang') || usp.get('language') || 'python';
 
 const languages = document.getElementById("languages");
 const lang = document.getElementById("lang");

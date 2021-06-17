@@ -54,6 +54,7 @@ app.ws("/ws/:language", (ws, req) => {
   }
 
   let command = supported_commands[language];
+  console.log("Recieved request to launch TTY with command", command)
 
   const ip = req.headers['x-forwarded-for'];
   console.log(ip)
@@ -66,6 +67,7 @@ app.ws("/ws/:language", (ws, req) => {
     ips.push(ip)
   }
 
+  console.log("Launching...")
 	const term = pty.spawn(command, [], { name: "xterm-color" });
 
 	term.on("data", (data) => {

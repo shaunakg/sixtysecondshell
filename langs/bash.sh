@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 ## See python.sh for comments
 ## This file will launch a Docker container with Alpine linux running Bash

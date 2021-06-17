@@ -30,8 +30,20 @@ const lang = document.getElementById("lang");
 lang.innerText = current_language;
 fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r.json()).then(j => {
 
-  languages.innerHTML = j.map(l => `<a href="?language=${l}&useAPI=${apiHost}">${l}</a>`).join(", ");
-  if (!j.includes(current_language)) {
+  const names = j.map( l => l.name );
+
+  j.forEach(lang => {
+
+    langLink = document.createElement("a");
+    langLink.innerText = lang.name;
+    langLink.href = `?language=${l}&useAPI=${apiHost}`;
+    langLink.title = lang.description;
+
+    languages.appendChild(langLink);
+    
+  });
+
+  if (!names.includes(current_language)) {
 
     document.getElementById("error").style.display="block";
     document.getElementById("error").innerText = `Your chosen language, "${current_language}", is not supported. Please pick another from the menu above.`;

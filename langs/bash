@@ -1,6 +1,6 @@
 #!/bin/sh
 
-## See python.sh for comments
+## See ./python for comments
 ## This file will launch a Docker container with Alpine linux running Bash
 
 docker run -it --network none alpine sh

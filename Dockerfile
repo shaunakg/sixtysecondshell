@@ -24,7 +24,7 @@ RUN apk add nodejs npm python3 docker build-base
 RUN npm install --only=production
 
 # Make language files executable for node-pty
-RUN chmod +x langs/*.sh
+RUN chmod +x ./langs/*.sh
 
 # Copy local code to the container image.
 COPY . ./

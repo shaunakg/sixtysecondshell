@@ -36,7 +36,7 @@ fetch(window.location.protocol + "//" + apiHost + "/meta/languages").then(r => r
 
     langLink = document.createElement("a");
     langLink.innerText = lang.name;
-    langLink.href = `?language=${l}&useAPI=${apiHost}`;
+    langLink.href = `?language=${encodeURIComponent(lang.name)}&useAPI=${encodeURIComponent(apiHost)}`;
     langLink.title = lang.description;
 
     languages.appendChild(langLink);

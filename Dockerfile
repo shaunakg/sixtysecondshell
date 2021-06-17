@@ -10,11 +10,8 @@ WORKDIR /usr/src/app
 # Copying this first prevents re-running npm install on every code change.
 COPY package*.json ./
 
-# Install node.js and npm
-RUN apk add nodejs npm
-
-# Install Docker, this will be used to host the REPLs
-RUN apk add docker
+# Install nodejs, npm, python3 and docker as dependencies for our program
+RUN apk add nodejs npm python3 docker
 
 # Install production dependencies.
 # If you add a package-lock.json, speed your build by switching to 'npm ci'.

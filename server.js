@@ -33,8 +33,8 @@ let ips = [];
 
 const supported_commands = {
 
-  python: "./langs/python.sh",
-  bash: "./langs/bash.sh"
+  python: "./langs/python",
+  bash: "./langs/bash"
 
 };
 

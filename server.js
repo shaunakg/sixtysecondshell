@@ -33,8 +33,8 @@ let ips = [];
 
 const supported_commands = {
 
-  python: "docker run -it python python",
-  bash: "docker run -it alpine bash"
+  python: "langs/python.sh",
+  bash: "langs/bash.sh"
 
 };
 

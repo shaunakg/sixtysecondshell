@@ -35,5 +35,5 @@ RUN npm install --only=production
 COPY . ./
 
 # Run the web service on container startup.
-ENV PORT=80
+ENV PORT=$PORT
 CMD [ "node", "server.js" ]

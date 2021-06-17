@@ -10,8 +10,8 @@ WORKDIR /usr/src/app
 # Copying this first prevents re-running npm install on every code change.
 COPY package*.json ./
 
-# Install node.js
-RUN apk add nodejs
+# Install node.js and npm
+RUN apk add nodejs npm
 
 # Install Docker, this will be used to host the REPLs
 RUN apk add docker
@@ -25,4 +25,5 @@ RUN npm install --only=production
 COPY . ./
 
 # Run the web service on container startup.
+ENV PORT=80
 CMD [ "node", "server.js" ]

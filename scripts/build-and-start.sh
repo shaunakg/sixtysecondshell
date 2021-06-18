@@ -3,7 +3,7 @@
 
 ## Make language executables. Not in Dockerfile because it is a read-only filesystem
 ## See: https://stackoverflow.com/questions/56045077/dockerfile-run-chmod-not-taking-effect
-chmod +x ./langs/*
+chmod --recursive +x ./langs/
 
 ## Build docker image
 echo "Building image..."

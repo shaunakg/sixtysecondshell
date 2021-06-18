@@ -5,4 +5,5 @@
 ## See ./python for comments
 ## This file will launch a Docker container with the esolang/spl image, running spl.
 
+echo Launching your SPL environment...
 docker run --rm -it --network none esolang/spl spl

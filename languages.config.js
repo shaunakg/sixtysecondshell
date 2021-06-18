@@ -68,7 +68,8 @@ const langs = [
     {
         name: "Shakespeare Programming Language",
         script: "./langs/esolangs/spl",
-        description: "The Shakespeare Programming Language is an esolang that allows you to write programs like Shakespearean plays."
+        description: "The Shakespeare Programming Language is an esolang that allows you to write programs like Shakespearean plays.",
+        image: "images/langs/spl.jpg"
     }
 
 ]

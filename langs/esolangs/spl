@@ -1,0 +1,8 @@
+#!/bin/sh
+
+## SixtySecondShell launch script for Shakespeare Programming Language
+
+## See ./python for comments
+## This file will launch a Docker container with the esolang/spl image, running spl.
+
+docker run --rm -it --network none esolang/spl spl

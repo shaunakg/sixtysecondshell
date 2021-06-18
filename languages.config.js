@@ -63,6 +63,12 @@ const langs = [
         script: "./langs/perl",
         description: "Perl is a high-level, general-purpose, interpreted, dynamic programming language.",
         image: "images/langs/perl.png"
+    },
+
+    {
+        name: "Shakespeare Programming Language",
+        script: "./langs/esolangs/spl",
+        description: "The Shakespeare Programming Language is an esolang that allows you to write programs like Shakespearean plays."
     }
 
 ]

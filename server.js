@@ -9,11 +9,10 @@ const ws = require("express-ws");
 const pty = require("node-pty");
 
 const app = express();
-app.use(express.static("public/"))
 
 app.use(require('cors')({
-  origin: "https://sixtysecondsofpython.srg.id.au"
-}))
+  origin: "https://sixtysecondshell.srg.id.au"
+}));
 
 const rateLimit = require("express-rate-limit");
 
@@ -35,6 +34,8 @@ const language_names = languages.map(x => x.name);
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
 ws(app);
+
+app.get("/", (req, res) => res.redirect("https://sixtysecondshell.srg.id.au/", 301))
 
 app.get("/meta/languages", (req, res) => {
 

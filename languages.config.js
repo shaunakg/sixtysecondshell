@@ -4,55 +4,65 @@
 //      name: human readable name presented to user. Preferably with no spaces.
 //      script: bash script located relative to server.js that contains launch instructions for the language's REPL
 //      description: human readable description, can include HTML.
+//      image: URL to image, relative to site. If you want it hosted on the frontend, contact me.
 
 const langs = [
 
     {
         name: "Python3",
         script: "./langs/python",
-        description: "Python is a high-level language that is great for beginner users. Recommended, as you can probably do the most in 60 seconds out of any other."
+        description: "Python is a high-level language that is great for beginner users. Recommended, as you can probably do the most in 60 seconds out of any other.",
+        image: "images/langs/python.png"
+
     },
 
     {
         name: "Bash",
         script: "./langs/bash",
-        description: "Bash is the default shell on most Linux systems. This is good if you want to explore, but not that great for general programming."
+        description: "Bash is the default shell on most Linux systems. This is good if you want to explore, but not that great for general programming.",
+        image: "images/langs/bash.png"
     },
 
     {
         name: "Ruby",
         script: "./langs/ruby",
-        description: "[Wikipedia] Ruby is an interpreted, high-level, general-purpose programming language."
+        description: "[Wikipedia] Ruby is an interpreted, high-level, general-purpose programming language.",
+        image: "images/langs/ruby.png"
     },
 
     {
         name: "Node.JS",
         script: "./langs/node",
-        description: "Node.JS is a popular language for writing web servers and programs. Note: We have temporarily disabled internet access on our containers, and you may not be able to access some modules."
+        description: "Node.JS is a popular language for writing web servers and programs. Note: We have temporarily disabled internet access on our containers, and you may not be able to access some modules.",
+        image: "images/langs/node.png"
     },
 
     {
         name: "Java",
         script: "./langs/java",
-        description: "[Wikipedia] Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible."
+        description: "[Wikipedia] Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.",
+        image: "images/langs/java.png"
     },
 
     {
         name: "MySQL",
         script: "./langs/mysql",
-        description: "MySQL is the world's most popular open source database. You'll be connected to the public ensembl.org database of the human genome."
+        description: "MySQL is the world's most popular open source database. You'll be connected to the public ensembl.org database of the human genome.",
+        image: "images/langs/mysql.png"
     },
 
     {
         name: "PHP",
         script: "./langs/php",
-        description: "PHP is a programming language primarily used for web development."
+        description: "PHP is a programming language primarily used for web development.",
+        image: "images/langs/php.png"
     },
 
     {
         name: "Perl",
         script: "./langs/perl",
-        description: "Perl is a high-level, general-purpose, interpreted, dynamic programming language."
+        description: "Perl is a high-level, general-purpose, interpreted, dynamic programming language.",
+        image: "images/langs/perl.png"
     }
 
 ]

@@ -1,10 +1,6 @@
 
 #!/bin/bash
 
-## Rudimentary approch to clearing ports and containers. 
-sudo docker kill $(sudo docker ps -q)
-sudo docker rm $(sudo docker ps -a -q)
-
 ## Make language executables. Not in Dockerfile because it is a read-only filesystem
 ## See: https://stackoverflow.com/questions/56045077/dockerfile-run-chmod-not-taking-effect
 chmod +x ./langs/*

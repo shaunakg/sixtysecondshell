@@ -151,7 +151,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
       ws.send("__TERMEXIT");
       clearTimeout(timeout);
 
-      fs.unlinkSync("./__code_store/" + exec.fileName);
+      // fs.unlinkSync("./__code_store/" + exec.fileName);
 
       return ws.close();
 
@@ -173,7 +173,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
       ws.send("To prevent this in the furture, try using more efficient code or check for bugs beforehand. Thanks!")
       ws.send("__TERMEXIT");
 
-      fs.unlinkSync("./__code_store/" + exec.fileName);
+      // fs.unlinkSync("./__code_store/" + exec.fileName);
 
       term.kill()
       return ws.close();

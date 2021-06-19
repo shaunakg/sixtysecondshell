@@ -11,7 +11,7 @@
 
 echo === SixtySecondShell Shell-Less Execution Runtime ===
 echo "Launching environment $1"
-echo
+echo `pwd`
 echo
 
 # Notice that we are mounting the code store directory to the container.

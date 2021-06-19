@@ -2,8 +2,20 @@
 
 ## SixtySecondShell launch script for Shakespeare Programming Language
 
-## See ./python for comments
 ## This file will launch a Docker container with the esolang/spl image, running spl.
 
-echo Launching your SPL environment...
-docker run --rm -it --network none esolang/spl spl
+# This programming language is shell-less - it does NOT come with a REPL.
+# Therefore, we are using the shell-less execution runtime to load the file into the container.
+
+# The server will pass us the file name, which we will pass to the container
+
+echo === SixtySecondShell Shell-Less Execution Runtime ===
+echo "Launching environment $1"
+echo
+echo
+
+# Notice that we are mounting the code store directory to the container.
+docker run --rm -v /usr/src/app/__code_store/:/code -it --network none esolang/spl "spl /code/$1"
+
+echo
+echo "=== S3 runtime ended. ==="

@@ -8,11 +8,17 @@ const express = require("express");
 const ws = require("express-ws");
 const pty = require("node-pty");
 
+const fs = require("fs");
+const {v4, validate} = require("uuid");
+
 const app = express();
+let noshell_execs = {};
 
 app.use(require('cors')({
   origin: "https://sixtysecondshell.srg.id.au"
 }));
+
+app.use(require('body-parser').json())
 
 const rateLimit = require("express-rate-limit");
 
@@ -47,6 +53,126 @@ app.get("/meta/languages", (req, res) => {
   );
 
 });
+
+app.post("/exec_noshell", (req, res) => {
+
+  if (!req.body.language || !language_names.includes(req.body.language)) {
+
+    return res.status(400).json({
+      message: "The language selected is invalid."
+    });
+
+  }
+
+  if (!req.body.code) {
+
+    return res.status(400).json({
+      message: "No code is present."
+    });
+
+  }
+
+  if (req.body.code.length > 4000) {
+
+    return res.status(400).json({
+      message: "Code is too long, please shorten and try again."
+    })
+
+  }
+
+  const fileId = v4();
+  const fileName = fileId + ".60secondshell.code";
+
+  fs.writeFileSync("./__code_store/" + fileName, req.body.code);
+  noshell_execs[fileId] = {
+    fileName: fileName,
+    language: languages.filter(l => l.name === req.body.language)[0]
+  }
+
+  return res.json({
+    success: true,
+    id: fileId
+  });  
+
+});
+
+app.ws("/ws/_exec/:uuid", (ws, req) => {
+
+  if (!validate(req.params.uuid)) {
+
+    ws.send("SixtySecondShell Host Runtime Error: [Bad Request] Shell-less exec ID could not be validated - try again.\n\n")
+    ws.send("__TERMEXIT");
+    
+    return ws.close();
+
+  }
+
+  if (!noshell_execs[req.params.uuid]) {
+
+    ws.send("SixtySecondShell Host Runtime Error: [Not Found] Shell-less exec ID does not exist.\n\n");
+    ws.send("__TERMEXIT");
+
+    return ws.close();
+
+  }
+
+  const exec = noshell_execs[req.params.uuid];
+  const term = pty.spawn(exec.script, [ exec.fileName ], { name: "xterm-color" });
+
+	term.on("data", (data) => {
+
+		try {
+			ws.send(data);
+		} catch (err) {
+      console.error(err)
+		}
+
+	});
+
+  term.on("exit", (data) => {
+
+    try {
+
+      ws.send("\n\n Shell-less process has exited. Your session has ended.")
+      ws.send("__TERMEXIT");
+      clearTimeout(timeout);
+
+      fs.unlinkSync("./__code_store/" + exec.fileName);
+
+      return ws.close();
+
+    } catch (err) { console.error(err) }
+
+  })
+
+	ws.on("message", (data) => {
+    
+		return term.write(data);
+
+	});
+
+	timeout = setTimeout(() => {
+
+    try {
+
+      ws.send("\n\n Sorry, your process is taking too long. While we allow more than 60 seconds for shell-less processes, yours has exceeded the maximum time limit and will be killed.")
+      ws.send("To prevent this in the furture, try using more efficient code or check for bugs beforehand. Thanks!")
+      ws.send("__TERMEXIT");
+
+      fs.unlinkSync("./__code_store/" + exec.fileName);
+
+      term.kill()
+      return ws.close();
+
+    } catch (e) {
+
+      return console.warn("Unable to close websocket to " + ip + " after timeout, probably closed the page.");
+
+    }
+
+	}, 180 * 1e3); // session timeout
+
+})
 
 app.ws("/ws/:language", (ws, req) => {
 
@@ -95,10 +221,15 @@ app.ws("/ws/:language", (ws, req) => {
   term.on("exit", (data) => {
 
     try {
+
       ws.send("\n\nTerminal has exited. Your session has ended.")
       ws.send("__TERMEXIT");
       clearTimeout(timeout);
+
+      fs.unlinkSync("./__code_store/")
+
       return ws.close();
+
     } catch (err) { console.error(err) }
 
   })

@@ -240,7 +240,7 @@ app.ws("/ws/:language", (ws, req) => {
       ws.send("__TERMEXIT");
       clearTimeout(timeout);
 
-      fs.unlinkSync("./__code_store/")
+      // fs.unlinkSync("./__code_store/")
 
       return ws.close();
 

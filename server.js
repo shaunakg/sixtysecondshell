@@ -92,11 +92,14 @@ app.post("/exec_noshell", (req, res) => {
   return res.json({
     success: true,
     id: fileId
-  });  
+  });
 
 });
 
 app.ws("/ws/_exec/:uuid", (ws, req) => {
+
+  console.log("No-shell execution request")
+  console.log(req.params.uuid)
 
   if (!validate(req.params.uuid)) {
 
@@ -117,6 +120,8 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
   }
 
   const exec = noshell_execs[req.params.uuid];
+  console.log(exec);
+
   const term = pty.spawn(exec.script, [ exec.fileName ], { name: "xterm-color" });
 
 	term.on("data", (data) => {

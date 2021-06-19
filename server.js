@@ -56,6 +56,8 @@ app.get("/meta/languages", (req, res) => {
 
 app.post("/exec_noshell", (req, res) => {
 
+  console.log("== No-shell code upload request ==");
+
   if (!req.body.language || !language_names.includes(req.body.language)) {
 
     return res.status(400).json({
@@ -83,11 +85,18 @@ app.post("/exec_noshell", (req, res) => {
   const fileId = v4();
   const fileName = fileId + ".60secondshell.code";
 
+  console.log(`Saving to ${"./__code_store/" + fileName}`)
+
   fs.writeFileSync("./__code_store/" + fileName, req.body.code);
   noshell_execs[fileId] = {
     fileName: fileName,
     language: languages.filter(l => l.name === req.body.language)[0]
   }
+
+  console.dir({
+    success: true,
+    id: fileId
+  })
 
   return res.json({
     success: true,
@@ -98,7 +107,7 @@ app.post("/exec_noshell", (req, res) => {
 
 app.ws("/ws/_exec/:uuid", (ws, req) => {
 
-  console.log("No-shell execution request")
+  console.log("== No-shell execution request ==")
   console.log(req.params.uuid)
 
   if (!validate(req.params.uuid)) {

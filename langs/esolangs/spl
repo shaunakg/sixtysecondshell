@@ -15,7 +15,7 @@ echo
 echo
 
 # Notice that we are mounting the code store directory to the container.
-docker run --rm -v /usr/src/app/__code_store/:/code -it --network none esolang/spl "spl /code/$1"
+docker run --rm -v /usr/src/app/__code_store:/code:ro -it --network none esolang/spl "spl /code/$1"
 
 echo
 echo "=== S3 runtime ended. ==="

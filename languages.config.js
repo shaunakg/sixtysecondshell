@@ -73,13 +73,23 @@ const langs = [
         noshell: false
     },
 
+    // Problem with esolang/spl image, currently inactive
+    // {
+    //     name: "Shakespeare Programming Language",
+    //     script: "./langs/esolangs/spl",
+    //     description: "The Shakespeare Programming Language is an esolang that allows you to write programs like Shakespearean plays.",
+    //     image: "images/langs/spl.jpg",
+    //     noshell: true
+    // }
+
     {
-        name: "Shakespeare Programming Language",
-        script: "./langs/esolangs/spl",
-        description: "The Shakespeare Programming Language is an esolang that allows you to write programs like Shakespearean plays.",
-        image: "images/langs/spl.jpg",
+        name: "Evil",
+        script: "./langs/esolangs/evil",
+        description: "evil is a minimal language of the line-noise school. It was devised by Tom Wrensch in about 1999, while he was a graduate student at the University of Colorado.",
+        image: "images/langs/evil.png",
         noshell: true
     }
+
 
 ]
 

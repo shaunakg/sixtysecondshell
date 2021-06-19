@@ -1,5 +1,12 @@
 #!/bin/sh
 
+#################################################### 
+# Note: there seems to be an issue with the
+# esolang/spl image. Therefore, SPL is currently
+# inactive. DO NOT REFERENCE THIS SCRIPT IN
+# languages.config.js
+####################################################
+
 ## SixtySecondShell launch script for Shakespeare Programming Language
 
 ## This file will launch a Docker container with the esolang/spl image, running spl.
@@ -13,7 +20,7 @@ echo === SixtySecondShell Shell-Less Execution Runtime ===
 echo "Launching environment $1"
 echo
 
-# Notice that we are mounting the code store directory to the container.
+# Note that since this is docker-in-docker, we make the volume reference relative to the HOST machine.
 docker run --rm -v "/home/ec2-user/sixtysecondshell/__code_store":/root/__code_store -it --network none esolang/spl spl "__code_store/$1"
 
 echo

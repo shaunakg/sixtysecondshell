@@ -131,6 +131,18 @@ zaeeeeeaeawuuuw`,
         hello_world: null,
         args: null
 
+    },
+
+    {
+
+        name: "FetLang",
+        script: "./langs/esolangs/_esolang_generic",
+        description: "xxx",
+        image: "images/langs/restricted.png",
+        noshell: true,
+        hello_world: "Make slave scream \"Hello World!\"",
+        args: ["fetlang"]
+
     }
 
 

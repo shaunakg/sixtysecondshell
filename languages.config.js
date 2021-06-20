@@ -144,6 +144,17 @@ zaeeeeeaeawuuuw`,
         args: ["fetlang"],
         hidden: true
 
+    },
+
+    {
+        name: "Scala",
+        script: "./langs/scala",
+        description: "Scala is a strong statically typed general-purpose programming language which supports both object-oriented programming and functional programming.",
+        image: "images/langs/scala.png",
+        noshell: false,
+        hello_world: "object Hello {\n    def main(args: Array[String]) = {\n        println(\"Hello, world\")\n    }\n}",
+        args: null,
+        hidden: false
     }
 
 

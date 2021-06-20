@@ -87,6 +87,20 @@ const langs = [
         script: "./langs/esolangs/_esolang_generic",
         description: "evil is a minimal language of the line-noise school. It was devised by Tom Wrensch in about 1999, while he was a graduate student at the University of Colorado.",
         image: "images/langs/evil.png",
+        hello_world: `
+zaeeeaeeew
+zaeeaeeaeaw
+zaeaeeaeeaew
+zaeaeeaeeaew
+zuueeueew
+zaeeeeew
+zuueueueeeew
+zuueeueew
+zaeeaeeaeaeew
+zaeaeeaeeaew
+zaeeaeeaew
+zaeeeeeaw
+zaeeeeeaeawuuuw`,
         args: ["evil"],
         noshell: true
     },
@@ -97,6 +111,9 @@ const langs = [
         script: "./langs/esolangs/_esolang_generic",
         description: "Emojicode is an open-source, full-blown programming language consisting of emojis. See https://www.emojicode.org/",
         image: "images/langs/emojicode.png",
+        hello_world: `🏁 🍇
+    😀 🔤Hello World!🔤❗️
+🍉`,
         args: ["emojicode"],
         noshell: true
 

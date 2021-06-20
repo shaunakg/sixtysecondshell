@@ -199,9 +199,10 @@ app.ws("/ws/:language", (ws, req) => {
     return ws.close();
   }
 
-  let command = languages.filter(x => x.name === language)[0] ? languages.filter(x => x.name === language)[0].script : languages[0].script;
+  let langobject = languages.filter(x => x.name === language)[0] ? languages.filter(x => x.name === language)[0] : languages[0];
+  let command = langobject.script;
 
-  console.log("Recieved request to launch TTY with command", command)
+  console.log("Recieved request to launch TTY with command", command, "and args", langobject.args)
 
   const ip = req.headers['x-forwarded-for'];
   console.log(ip)
@@ -221,7 +222,7 @@ app.ws("/ws/:language", (ws, req) => {
   }
 
   console.log("Launching...")
-	const term = pty.spawn(command, exec.language.args || [], { name: "xterm-color" });
+	const term = pty.spawn(command, langobject.args || [], { name: "xterm-color" });
 
 	term.on("data", (data) => {
 

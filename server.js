@@ -132,6 +132,8 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
   const exec = noshell_execs[req.params.uuid];
   console.log(exec);
 
+  console.log("Launching with args", [ exec.fileName, ...(exec.language.args || []) ])
+
   const term = pty.spawn(exec.language.script, [ exec.fileName, ...(exec.language.args || []) ], { name: "xterm-color" });
 
 	term.on("data", (data) => {

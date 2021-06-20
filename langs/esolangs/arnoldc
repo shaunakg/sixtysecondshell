@@ -1,0 +1,4 @@
+#!/bin/sh
+# This file will run the script with filename passed to $1 using the ArnoldC interpreter
+
+docker run --rm -v "/home/ec2-user/sixtysecondshell/__code_store":/code -it adoptopenjdk/openjdk11:alpine-slim /bin/sh -c "wget http://lhartikk.github.io/ArnoldC.jar; java -jar ArnoldC.jar -run /code/$1"

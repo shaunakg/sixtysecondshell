@@ -155,6 +155,17 @@ zaeeeeeaeawuuuw`,
         hello_world: "object Hello {\n    def main(args: Array[String]) = {\n        println(\"Hello, world\")\n    }\n}",
         args: null,
         hidden: false
+    },
+
+    {
+        name: "ArnoldC",
+        script: "./langs/esolangs/arnoldc",
+        description: "A programming language based off Arnold Schwarzenegger quotes.",
+        image: "images/langs/arnoldc.jpg",
+        noshell: true,
+        hello_world: "IT'S SHOWTIME\nTALK TO THE HAND \"hello world\"\nYOU HAVE BEEN TERMINATED",
+        args: null,
+        hidden: false
     }
 
 

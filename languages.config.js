@@ -165,7 +165,7 @@ zaeeeeeaeawuuuw`,
         noshell: true,
         hello_world: "IT'S SHOWTIME\nTALK TO THE HAND \"hello world\"\nYOU HAVE BEEN TERMINATED",
         args: null,
-        hidden: false
+        hidden: true
     },
 
     {

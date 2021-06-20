@@ -141,7 +141,8 @@ zaeeeeeaeawuuuw`,
         image: "images/langs/restricted.png",
         noshell: true,
         hello_world: "Make slave scream \"Hello World!\"",
-        args: ["fetlang"]
+        args: ["fetlang"],
+        hidden: true
 
     }
 

@@ -48,7 +48,8 @@ app.get("/meta/languages", (req, res) => {
   return res.json(
     languages.map(x => ({
       ...x,
-      script: null
+      script: null,
+      args: null
     }))
   );
 
@@ -131,7 +132,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
   const exec = noshell_execs[req.params.uuid];
   console.log(exec);
 
-  const term = pty.spawn(exec.language.script, [ exec.fileName ], { name: "xterm-color" });
+  const term = pty.spawn(exec.language.script, [ exec.fileName, ...(exec.language.args || []) ], { name: "xterm-color" });
 
 	term.on("data", (data) => {
 
@@ -151,7 +152,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
       ws.send("__TERMEXIT");
       clearTimeout(timeout);
 
-      // fs.unlinkSync("./__code_store/" + exec.fileName);
+      fs.unlinkSync("./__code_store/" + exec.fileName);
 
       return ws.close();
 
@@ -173,7 +174,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
       ws.send("To prevent this in the furture, try using more efficient code or check for bugs beforehand. Thanks!")
       ws.send("__TERMEXIT");
 
-      // fs.unlinkSync("./__code_store/" + exec.fileName);
+      fs.unlinkSync("./__code_store/" + exec.fileName);
 
       term.kill()
       return ws.close();
@@ -220,7 +221,7 @@ app.ws("/ws/:language", (ws, req) => {
   }
 
   console.log("Launching...")
-	const term = pty.spawn(command, [], { name: "xterm-color" });
+	const term = pty.spawn(command, exec.language.args || [], { name: "xterm-color" });
 
 	term.on("data", (data) => {
 
@@ -239,8 +240,6 @@ app.ws("/ws/:language", (ws, req) => {
       ws.send("\n\nTerminal has exited. Your session has ended.")
       ws.send("__TERMEXIT");
       clearTimeout(timeout);
-
-      // fs.unlinkSync("./__code_store/")
 
       return ws.close();
 

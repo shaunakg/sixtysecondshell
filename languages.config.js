@@ -166,6 +166,17 @@ zaeeeeeaeawuuuw`,
         hello_world: "IT'S SHOWTIME\nTALK TO THE HAND \"hello world\"\nYOU HAVE BEEN TERMINATED",
         args: null,
         hidden: false
+    },
+
+    {
+        name: "Fish (><>)",
+        script: "./langs/esolangs/_esolang_generic",
+        description: "><> (pronounced as if it were spelled as \"fish\") is a stack-based, reflective, two-dimensional esoteric programming language.",
+        image: "images/langs/fish.jpg",
+        noshell: true,
+        hello_world: "!v\"Hello, World!\"r!\n >l?!;o",
+        args: ["fish"],
+        hidden: false
     }
 
 

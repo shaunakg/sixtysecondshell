@@ -84,7 +84,7 @@ app.post("/exec_noshell", (req, res) => {
   }
 
   const fileId = v4();
-  const fileName = fileId + ".60secondshell-code";
+  const fileName = fileId + ".60secondshell.code";
 
   console.log(`Saving to ${"./__code_store/" + fileName}`)
 

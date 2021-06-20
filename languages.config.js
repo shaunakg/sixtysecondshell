@@ -5,6 +5,8 @@
 //      script: bash script located relative to server.js that contains launch instructions for the language's REPL
 //      description: human readable description, can include HTML.
 //      image: URL to image, relative to site. If you want it hosted on the frontend, contact me.
+//      hello_world: A simple "hello world" program. This will be prefilled in the editor for shellless languages. If the language has a shell, this has no effect for now.
+//      args: args to pass to the script. Used for the generic_esolang script to pass the name of the language.
 
 const langs = [
 
@@ -116,6 +118,18 @@ zaeeeeeaeawuuuw`,
 🍉`,
         args: ["emojicode"],
         noshell: true
+
+    },
+
+    {
+
+        name: "PowerShell",
+        script: "./langs/powershell",
+        description: "PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and the associated scripting language.",
+        image: "images/langs/powershell.png",
+        noshell: false,
+        hello_world: null,
+        args: null
 
     }
 

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+## See ./python for comments
+## This file will launch a Docker container with a Powershell interactive shell running
+
+# Pulling from Microsoft container repo to bypass 'pull access denied'
+sudo docker run --rm -it --network none mcr.microsoft.com/powershell:alpine-3.12 pwsh

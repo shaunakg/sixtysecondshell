@@ -20,6 +20,17 @@ const langs = [
     },
 
     {
+        name: "Python3 (with editor)",
+        script: "./langs/esolangs/_esolang_generic",
+        description: "Write a Python3 program in 60 seconds instead of using the command line shell.",
+        image: "images/langs/python.png",
+        noshell: true,
+        args: ['python3'],
+        hello_world: "print(\"Hello World!\")",
+        hidden: false
+    },
+
+    {
         name: "Bash",
         script: "./langs/bash",
         description: "Bash is the default shell on most Linux systems. This is good if you want to explore, but not that great for general programming.",
@@ -177,7 +188,40 @@ zaeeeeeaeawuuuw`,
         hello_world: "!v\"Hello, World!\"r!\n >l?!;o",
         args: ["fish"],
         hidden: false
-    }
+    },
+
+    {
+        name: "COBOL",
+        script: "./langs/esolangs/_esolang_generic",
+        description: "COBOL is a compiled English-like computer programming language designed for business use.",
+        image: "images/langs/cobol.png",
+        noshell: true,
+        hello_world: "IDENTIFICATION DIVISION.\nPROGRAM-ID. SSSHELLOWRD.\n\nPROCEDURE DIVISION.\nDISPLAY \"Hello, world!\".\nSTOP RUN.",
+        args: ["cobol"],
+        hidden: false
+    },
+
+    {
+        name: "Rust",
+        script: "./langs/esolangs/_esolang_generic",
+        description: "Rust is a multi-paradigm programming language designed for performance and safety, especially safe concurrency.",
+        image: "images/langs/rust.png",
+        noshell: true,
+        hello_world: "fn main() {\n    println!(\"Hello, World!\");\n}",
+        args: ["rust"],
+        hidden: false
+    },
+
+    {
+        name: "Lua",
+        script: "./langs/esolangs/_esolang_generic",
+        description: "Lua is a lightweight, high-level, multi-paradigm programming language designed primarily for embedded use in applications.",
+        image: "images/langs/lua.png",
+        noshell: true,
+        hello_world: "print(\"Hello, World!\")",
+        args: ["lua"],
+        hidden: false
+    },
 
 
 ]

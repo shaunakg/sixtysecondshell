@@ -106,6 +106,24 @@ app.post("/exec_noshell", (req, res) => {
 
 });
 
+app.get("/__healthcheck", async (req, res) => {
+  
+  console.log("ELB health check.")
+
+  const exec = require('child_process').exec;
+  exec("docker ps -aq | wc -l", (error, stdout, stderr) => {
+
+    if (error || stderr) {
+      console.error("Health check failed with error", error || stderr);
+      return res.end(stderr || error);
+    }
+
+    return res.end(stdout);
+    
+  });
+  
+})
+
 app.ws("/ws/_exec/:uuid", (ws, req) => {
 
   console.log("== No-shell execution request ==")

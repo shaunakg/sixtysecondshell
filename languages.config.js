@@ -223,6 +223,18 @@ zaeeeeeaeawuuuw`,
         hidden: false
     },
 
+    {
+        name: "Swift",
+        script: "./langs/esolangs/_esolang_generic",
+        description: "Swift is a general-purpose, multi-paradigm, compiled programming language developed by Apple Inc. and the open-source community.",
+        image: "images/langs/swift.png",
+        noshell: true,
+        hello_world: "print(\"Hello, World!\")",
+        args: ["swift"],
+        hidden: false
+    },
+
+
 
 ]
 

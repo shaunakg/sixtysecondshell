@@ -1,6 +1,5 @@
 // 
 // Sixty Seconds of Python
-// Under MIT Licence
 // 
 
 const process = require("process");
@@ -41,24 +40,28 @@ const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 :
 
 ws(app);
 
+// Redirect visits to index to our site
 app.get("/", (req, res) => res.redirect("https://sixtysecondshell.srg.id.au/", 301))
 
+// Languages endpoint
 app.get("/meta/languages", (req, res) => {
 
   return res.json(
     languages.map(x => ({
       ...x,
-      script: null,
-      args: null
+      script: null, // Remove sensitive keys
+      args: null // Remove sensitive keys
     }))
   );
 
 });
 
+// Shell-less code upload endpoint
 app.post("/exec_noshell", (req, res) => {
 
   console.log("== No-shell code upload request ==");
 
+  // Code must include a language that is valid.
   if (!req.body.language || !language_names.includes(req.body.language)) {
 
     return res.status(400).json({
@@ -67,6 +70,7 @@ app.post("/exec_noshell", (req, res) => {
 
   }
 
+  // Code request must include code.
   if (!req.body.code) {
 
     return res.status(400).json({
@@ -75,6 +79,8 @@ app.post("/exec_noshell", (req, res) => {
 
   }
 
+  // Less than 4000 characters to save space.
+  // 4000 is much more than most can type in 60 seconds so it should be sufficient.
   if (req.body.code.length > 4000) {
 
     return res.status(400).json({
@@ -83,12 +89,20 @@ app.post("/exec_noshell", (req, res) => {
 
   }
 
+  // Create a file ID with a version 4 UUID
   const fileId = v4();
-  const fileName = fileId + ".60secondshell.code";
 
+  // Create the file name with an extension
+  const fileName = fileId + ".60secondshell.code"; 
   console.log(`Saving to ${"./__code_store/" + fileName}`)
 
+  // Save it to our code storage directory.
+  // Note that this directory is mounted to the container by the script build-and-start.sh
+  // It links to /home/ec2-user/sixtysecondshell/__code_store on the host machine.
+
   fs.writeFileSync("./__code_store/" + fileName, req.body.code);
+
+  // Keep the information in memory. 
   noshell_execs[fileId] = {
     fileName: fileName,
     language: languages.filter(l => l.name === req.body.language)[0]
@@ -97,8 +111,9 @@ app.post("/exec_noshell", (req, res) => {
   console.dir({
     success: true,
     id: fileId
-  })
+  });
 
+  // Return the file ID to the client.
   return res.json({
     success: true,
     id: fileId
@@ -107,10 +122,15 @@ app.post("/exec_noshell", (req, res) => {
 });
 
 app.get("/__healthcheck", async (req, res) => {
+
+  // Health check for Elastic Load Balancer
+  // Returns number of running containers
   
-  console.log("ELB health check.")
+  console.log("ELB health check.");
 
   const exec = require('child_process').exec;
+
+  // Get number of running containers
   exec("docker ps -aq | wc -l", (error, stdout, stderr) => {
 
     if (error || stderr) {
@@ -126,9 +146,12 @@ app.get("/__healthcheck", async (req, res) => {
 
 app.ws("/ws/_exec/:uuid", (ws, req) => {
 
-  console.log("== No-shell execution request ==")
-  console.log(req.params.uuid)
+  // Actually execute a shell-less execution request.
 
+  console.log("== No-shell execution request ==")
+  console.log(req.params.uuid);
+
+  // The UUID should be valid.
   if (!validate(req.params.uuid)) {
 
     ws.send("SixtySecondShell Host Runtime Error: [Bad Request] Shell-less exec ID could not be validated - try again.\n\n")
@@ -138,6 +161,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 
   }
 
+  // The UUID should be in memory.
   if (!noshell_execs[req.params.uuid]) {
 
     ws.send("SixtySecondShell Host Runtime Error: [Not Found] Shell-less exec ID does not exist.\n\n");
@@ -149,10 +173,16 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 
   const exec = noshell_execs[req.params.uuid];
   console.log(exec);
-
+  
   console.log("Launching with args", [ exec.fileName, ...(exec.language.args || []) ])
 
+  // Launch the script, with the file name as the first argument.
+  // The script should mount the __code_store directory on to the container with docker run -v xxx
   const term = pty.spawn(exec.language.script, [ exec.fileName, ...(exec.language.args || []), req.params.uuid ], { name: "xterm-color" });
+
+  //
+  // Standard code to send terminal output to the user, and send user input to the terminal
+  //
 
 	term.on("data", (data) => {
 
@@ -172,7 +202,8 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
       ws.send("\n\n Shell-less process has exited. Your session has ended.")
       ws.send("__TERMEXIT");
       clearTimeout(timeout);
-
+      
+      // Delete stored code when done
       fs.unlinkSync("./__code_store/" + exec.fileName);
 
       return ws.close();
@@ -187,6 +218,10 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 
 	});
 
+
+  // Keep a code timeout of 180 seconds, prevents infinite looping.
+  // TODO: check if shorter timeout is viable.
+
 	timeout = setTimeout(() => {
 
     try {
@@ -195,6 +230,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
       ws.send("To prevent this in the furture, try using more efficient code or check for bugs beforehand. Thanks!")
       ws.send("__TERMEXIT");
 
+      // Delete stored code when done
       fs.unlinkSync("./__code_store/" + exec.fileName);
 
       term.kill();
@@ -214,6 +250,8 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 })
 
 app.ws("/ws/:language", (ws, req) => {
+
+  // This endpoint sets up the websocket connected to the running Docker container of the language that was requested.
 
   let language = req.params.language || "Python3";
   let timeout;
@@ -247,6 +285,10 @@ app.ws("/ws/:language", (ws, req) => {
 
   console.log("Launching...")
 	const term = pty.spawn(command, langobject.args || [], { name: "xterm-color" });
+
+  //
+  // Standard code to send terminal output to the user, and send user input to the terminal
+  //
 
 	term.on("data", (data) => {
 

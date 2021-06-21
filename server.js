@@ -141,7 +141,8 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 		try {
 			ws.send(data);
 		} catch (err) {
-      console.error(err)
+      term.kill()
+      console.error(err);
 		}
 
 	});
@@ -178,12 +179,15 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 
       fs.unlinkSync("./__code_store/" + exec.fileName);
 
-      term.kill()
+      term.kill();
       return ws.close();
 
     } catch (e) {
 
-      return console.warn("Unable to close websocket to " + ip + " after timeout, probably closed the page.");
+      term.kill();
+      fs.unlinkSync("./__code_store/" + exec.fileName);
+
+      return console.warn("Unable to close websocket after timeout, probably closed the page.");
 
     }
 

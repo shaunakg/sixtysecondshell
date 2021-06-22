@@ -178,7 +178,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 
   // Launch the script, with the file name as the first argument.
   // The script should mount the __code_store directory on to the container with docker run -v xxx
-  const term = pty.spawn(exec.language.script, [ exec.fileName, ...(exec.language.args || []), req.params.uuid ], { name: "xterm-color" });
+  const term = pty.spawn("sh", [exec.language.script, exec.fileName, ...(exec.language.args || []), req.params.uuid ], { name: "xterm-color" });
 
   //
   // Standard code to send terminal output to the user, and send user input to the terminal
@@ -284,7 +284,7 @@ app.ws("/ws/:language", (ws, req) => {
   }
 
   console.log("Launching...")
-	const term = pty.spawn(command, langobject.args || [], { name: "xterm-color" });
+	const term = pty.spawn("sh", [command, ...(langobject.args || [])], { name: "xterm-color" });
 
   //
   // Standard code to send terminal output to the user, and send user input to the terminal

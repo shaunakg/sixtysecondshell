@@ -34,6 +34,7 @@ app.use(limiter);
 let ips = [];
 
 const languages = require("./languages.config.json");
+const { exit } = require("process");
 const language_names = languages.map(x => x.name);
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
@@ -251,15 +252,61 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 
 app.ws("/ws/_interactive_terminal", (ws, req) => {
 
-  ws.send("=== Welcome to SixtySecondShell ===")
-  ws.send("\nPlease choose a language:")
-  for (const [index, lang] of languages.entries()) {
 
-    ws.send(`${index + 1}) ${lang.name}`);
+  const iterm = pty.spawn("python3", ["./langs/_interactive_terminal.py"], { name: "xterm-color" });
 
-  }
+  //
+  // Standard code to send terminal output to the user, and send user input to the terminal
+  //
 
-  return ws.close();
+	iterm.on("data", (data) => {
+
+    if (data.includes("__ITERM_EXIT")) {
+      
+      term.kill();
+
+      const exit_data = data.split("|");
+
+      if (exit_data[1] != "SUCCESS") {
+
+        ws.send("\nInteractive terminal process exited with an error, please reload the page to try again.\n")
+        return ws.close();
+
+      }
+
+      let exit_json = {};
+
+      try {
+
+        exit_json = JSON.parse(exit_data[2]);
+
+      } catch (e) {
+
+        ws.send("\nInteractive terminal process exited normally, but we could not parse the language selected. Please contact support.");
+        return ws.close(); 
+
+      }
+
+      ws.send("__ISHELL_EVNT|LANG_CHOSEN|" + encodeURIComponent(exit_json.name));
+
+    } else { return ws.send(data) }
+
+	});
+
+  iterm.on("exit", (data) => {
+
+    try {
+
+      ws.send("\n\nInteractive terminal process exited. Did you press CTRL+C? Reload the page to try again.");
+      return ws.close();
+
+    } catch (err) { console.error(err); }
+
+  })
+
+	ws.on("message", (data) => {	return term.write(data);	});
+
+
 })
 
 app.ws("/ws/:language", (ws, req) => {
@@ -284,7 +331,6 @@ app.ws("/ws/:language", (ws, req) => {
 
   if (countOccurrences(ips, ip) > 5) {
 
-    term.kill();
     ws.send(`\nTo prevent abuse of this service, we are limiting your IP address to ensure SSOP is available for everyone. This block will be lifted in around ten to fifteen minutes. [IP-LIMIT-${ip}]\n`);
     ws.send("__TERMEXIT");
     clearTimeout(timeout);

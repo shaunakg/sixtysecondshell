@@ -288,6 +288,7 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
       }
 
       ws.send("__ISHELL_EVNT|LANG_CHOSEN|" + encodeURIComponent(exit_json.name));
+      ws.close();
 
     } else { return ws.send(data) }
 

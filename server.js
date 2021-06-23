@@ -331,11 +331,22 @@ app.ws("/ws/:language", (ws, req) => {
   let timeout;
 
   if (!language_names.includes(language)) {
-    ws.send(`\nUnsupported language "${language}". Try one of: ${language_names.join(", ")}.\n`)
+    ws.send(`\nUnsupported language "${language}". Try one of: ${language_names.join(", ")}. Note: check if your language has a shell before trying.\n`)
     return ws.close();
   }
 
   let langobject = languages.filter(x => x.name === language)[0] ? languages.filter(x => x.name === language)[0] : languages[0];
+
+  if (langobject.noshell) {
+
+    ws.send(`\nCritical: language ${language} does not support a shell - go through GUI at https://sixtysecondshell.srg.id.au to upload code and run using ${language} interpreter.\n`);
+    ws.send("Session is now terminating.");
+    ws.send("__TERMEXIT");
+
+    return ws.close();
+    
+  }
+
   let command = langobject.script;
 
   console.log("Recieved request to launch TTY with command", command, "and args", langobject.args)

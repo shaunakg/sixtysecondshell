@@ -247,6 +247,20 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 
 	}, 180 * 1e3); // session timeout
 
+});
+
+app.ws("/ws/_interactive_terminal", (ws, req) => {
+
+  ws.send("=== Welcome to SixtySecondShell ===")
+  ws.send("\nPlease choose a language:")
+  for (const [index, lang] of languages.entries()) {
+
+    ws.send(`${index + 1}) ${lang.name}`);
+
+  }
+
+  return ws.close();
+
 })
 
 app.ws("/ws/:language", (ws, req) => {

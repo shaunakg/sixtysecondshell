@@ -312,10 +312,10 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
     try {
       ws.send("\r\nThe interactive terminal process has been killed due to session timeout. Reload the page to try again.")
       ws.close();
-      return term.kill()
+      return iterm.kill()
     } catch (e) {
       console.log("Terminal timed out after WS disconnect.");
-      return term.kill();
+      return iterm.kill();
     }
     
   }, 180 * 1e3);

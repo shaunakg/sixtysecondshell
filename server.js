@@ -307,6 +307,19 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
 
 	ws.on("message", (data) => {	return iterm.write(data);	});
 
+  setTimeout(() => {
+
+    try {
+      ws.send("\n\nThe interactive terminal process has been killed due to session timeout. Reload the page to try again.")
+      ws.close();
+      return term.kill()
+    } catch (e) {
+      console.log("Terminal timed out after WS disconnect.");
+      return term.kill();
+    }
+    
+  }, 180 * 1e3);
+
 
 })
 
@@ -343,7 +356,7 @@ app.ws("/ws/:language", (ws, req) => {
 
   }
 
-  console.log("Launching...")
+  ws.send("Launching your " + langobject.name + " container. As a reminder, you've got sixty seconds to do whatever you want, starting now.\n\n");
 	const term = pty.spawn("sh", [command, ...(langobject.args || [])], { name: "xterm-color" });
 
   //

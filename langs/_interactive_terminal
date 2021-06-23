@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "== SixtySecondShell Interactive Terminal =="
+echo
+
+echo ""

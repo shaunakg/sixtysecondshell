@@ -17,7 +17,7 @@ COPY package*.json ./
 # build-base - Required for node-tty
 # docker - hosts the containers
 # iptables - control access to sensitive data
-RUN apk add nodejs npm python3 docker build-base iptables
+RUN apk add nodejs npm python3 docker build-base iptables jq
 
 # Disable access to EC2 instance metadata
 # Currently broken - temp. solution is to disable container network access 

@@ -33,7 +33,7 @@ app.use(limiter);
 
 let ips = [];
 
-const languages = require("./languages.config");
+const languages = require("./languages.config.json");
 const language_names = languages.map(x => x.name);
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);

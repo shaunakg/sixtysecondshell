@@ -263,7 +263,7 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
 
     if (data.includes("__ITERM_EXIT")) {
       
-      term.kill();
+      iterm.kill();
 
       const exit_data = data.split("|");
 
@@ -305,7 +305,7 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
 
   })
 
-	ws.on("message", (data) => {	return term.write(data);	});
+	ws.on("message", (data) => {	return iterm.write(data);	});
 
 
 })

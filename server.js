@@ -155,7 +155,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
   // The UUID should be valid.
   if (!validate(req.params.uuid)) {
 
-    ws.send("SixtySecondShell Host Runtime Error: [Bad Request] Shell-less exec ID could not be validated - try again.\n\n")
+    ws.send("\rSixtySecondShell Host Runtime Error: [Bad Request] Shell-less exec ID could not be validated - try again.\n\n")
     ws.send("__TERMEXIT");
     
     return ws.close();
@@ -200,7 +200,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 
     try {
 
-      ws.send("\n\n Shell-less process has exited. Your session has ended.")
+      ws.send("\r\n Shell-less process has exited. Your session has ended.")
       ws.send("__TERMEXIT");
       clearTimeout(timeout);
       
@@ -227,7 +227,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
 
     try {
 
-      ws.send("\n\n Sorry, your process is taking too long. While we allow more than 60 seconds for shell-less processes, yours has exceeded the maximum time limit and will be killed.")
+      ws.send("\r\n Sorry, your process is taking too long. While we allow more than 60 seconds for shell-less processes, yours has exceeded the maximum time limit and will be killed.\r\n")
       ws.send("To prevent this in the furture, try using more efficient code or check for bugs beforehand. Thanks!")
       ws.send("__TERMEXIT");
 
@@ -269,7 +269,7 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
 
       if (exit_data[1] != "SUCCESS") {
 
-        ws.send("\nInteractive terminal process exited with an error, please reload the page to try again.\n")
+        ws.send("\r\nInteractive terminal process exited with an error, please reload the page to try again.\r\n")
         return ws.close();
 
       }
@@ -282,7 +282,7 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
 
       } catch (e) {
 
-        ws.send("\nInteractive terminal process exited normally, but we could not parse the language selected. Please contact support.");
+        ws.send("\r\nInteractive terminal process exited normally, but we could not parse the language selected. Please contact support.");
         return ws.close(); 
 
       }
@@ -298,7 +298,7 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
 
     try {
 
-      ws.send("\n\nInteractive terminal process exited. Did you press CTRL+C? Reload the page to try again.");
+      ws.send("\r\nInteractive terminal process exited. Did you press CTRL+C? Reload the page to try again.");
       return ws.close();
 
     } catch (err) { console.error(err); }
@@ -310,7 +310,7 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
   setTimeout(() => {
 
     try {
-      ws.send("\n\nThe interactive terminal process has been killed due to session timeout. Reload the page to try again.")
+      ws.send("\r\nThe interactive terminal process has been killed due to session timeout. Reload the page to try again.")
       ws.close();
       return term.kill()
     } catch (e) {
@@ -331,7 +331,7 @@ app.ws("/ws/:language", (ws, req) => {
   let timeout;
 
   if (!language_names.includes(language)) {
-    ws.send(`\nUnsupported language "${language}". Try one of: ${language_names.join(", ")}. Note: check if your language has a shell before trying.\n`)
+    ws.send(`\r\nUnsupported language "${language}". Try one of: ${language_names.join(", ")}. Note: check if your language has a shell before trying.\n`)
     return ws.close();
   }
 
@@ -339,7 +339,7 @@ app.ws("/ws/:language", (ws, req) => {
 
   if (langobject.noshell) {
 
-    ws.send(`\nCritical: language ${language} does not support a shell - go through GUI at https://sixtysecondshell.srg.id.au to upload code and run using ${language} interpreter.\n`);
+    ws.send(`\r\nCritical: language ${language} does not support a shell - go through GUI at https://sixtysecondshell.srg.id.au to upload code and run using ${language} interpreter.\n\r`);
     ws.send("Session is now terminating.");
     ws.send("__TERMEXIT");
 
@@ -356,7 +356,7 @@ app.ws("/ws/:language", (ws, req) => {
 
   if (countOccurrences(ips, ip) > 5) {
 
-    ws.send(`\nTo prevent abuse of this service, we are limiting your IP address to ensure SSOP is available for everyone. This block will be lifted in around ten to fifteen minutes. [IP-LIMIT-${ip}]\n`);
+    ws.send(`\r\nTo prevent abuse of this service, we are limiting your IP address to ensure SSOP is available for everyone. This block will be lifted in around ten to fifteen minutes. [IP-LIMIT-${ip}]\r\n`);
     ws.send("__TERMEXIT");
     clearTimeout(timeout);
     return ws.close();
@@ -367,7 +367,7 @@ app.ws("/ws/:language", (ws, req) => {
 
   }
 
-  ws.send("Launching your " + langobject.name + " container. As a reminder, you've got sixty seconds to do whatever you want, starting now.\n\n");
+  ws.send("Launching your " + langobject.name + " container. As a reminder, you've got sixty seconds to do whatever you want, starting now.\r\n\n");
 	const term = pty.spawn("sh", [command, ...(langobject.args || [])], { name: "xterm-color" });
 
   //
@@ -388,7 +388,7 @@ app.ws("/ws/:language", (ws, req) => {
 
     try {
 
-      ws.send("\n\nTerminal has exited. Your session has ended.")
+      ws.send("\r\n\nTerminal has exited. Your session has ended.")
       ws.send("__TERMEXIT");
       clearTimeout(timeout);
 
@@ -407,7 +407,7 @@ app.ws("/ws/:language", (ws, req) => {
 	timeout = setTimeout(() => {
 
     try {
-      ws.send("\n:) Your sixty seconds has expired. See you next time!\n")
+      ws.send("\r\n:) Your sixty seconds has expired. See you next time!\n")
       ws.send("__TERMEXIT");
       term.kill()
       return ws.close();

@@ -2,7 +2,7 @@
 import json
 langs = []
 
-with open("languages.config.json", "r", encoding="mbcs") as f:
+with open("languages.config.json", "r") as f:
     langs = json.loads(f.read())
 
 langs = list(filter(lambda x: not x['noshell'], langs))
@@ -44,5 +44,4 @@ while True:
         exit()
 
     except Exception as e:
-        print(e)
-        print("Invalid choice. Please try again.\n")
+        print("Invalid choice, or an error occurred. Please try again.\n")

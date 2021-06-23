@@ -260,7 +260,6 @@ app.ws("/ws/_interactive_terminal", (ws, req) => {
   }
 
   return ws.close();
-
 })
 
 app.ws("/ws/:language", (ws, req) => {

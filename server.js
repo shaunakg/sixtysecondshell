@@ -446,7 +446,7 @@ app.ws("/ws/:language", (ws, req) => {
           ws.send("\r\nListing installed packages...\r\n");
 
           return term.write(
-            langobject.packages.list.replace("{{NAME}}", package_name)
+            langobject.packages.list
           );
 
         }

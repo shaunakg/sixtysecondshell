@@ -1,15 +1,13 @@
-![Screenshot of SSOP](https://user-images.githubusercontent.com/28996247/122406053-e60b3a80-cfc3-11eb-935c-45426162cec9.png)
+![og-terminal](https://user-images.githubusercontent.com/28996247/125796870-7e9b0206-70b5-4342-9ad2-83b343088a14.png)
 
-# Welcome to Sixty Seconds Of Python
+# Welcome to SixtySecondShell
 
 ## What is this?
 - This is a small server that gives you 60 seconds of various shells to try out.
 - Each shell is run using `docker run` on a lightweight image, and is destroyed after use.
 
 ## Where is the front end?
-**The below information is outdated, frontend is located in `public/` until migration completes**
 - The front-end is located [here](https://github.com/shaunakg/sixty-seconds-of-python-frontend).
-- The server does not serve the front end because people who run shells on the server would then be able to inject arbitrary code into the front end, which is undesireable. It's fine if they do it on the server because Heroku will wipe it in a few minutes.
 
 ## How do I add languages?
 It's pretty simple:
@@ -22,8 +20,8 @@ It's pretty simple:
   - Make sure your `docker run` includes the option `-ti`, for **i**nteractive **t**ty
   - Sometimes there is a Docker image available for your language. This is preferred, for example: `docker run -it node node` will run the NodeJS CLI from the Node image in the Docker Hub.
   - If not, you can use Alpine Linux to run the REPL. In this case, you can make your own folder and Dockerfile, then build the image and run it.
-  - Note that we are currently disabling network for all images. This is done with `--network none`. This will stay in place until a work around is found to prevent access of EC2 metadata. If you know one, feel free to pull request.
-  - Note that the pseudoterminal probably will break if you try and display some time of GUI. Repl.it supports this, but we don't as yet.
+  - Note that the pseudoterminal probably will break if you try and display some type of GUI. Repl.it supports this, but we don't as yet.
+  - **Note: Docker user 'esolang' provides around 200 images of various esolangs with the same setup. Since using this is much easier than creating a build script, the `_esolang\_generic` script can be used. The server will pass in the filename of some uploaded code as an argument.`
 5. As stated in step 2, put a reference to your script in `languages.config.js`
 6. Make a descriptive pull request and double check that you've followed the steps above.
 

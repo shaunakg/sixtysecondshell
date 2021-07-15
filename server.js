@@ -427,7 +427,7 @@ app.ws("/ws/:language", (ws, req) => {
           ws.send("\r\nInstalling " + package_name + "...\r\n");
 
           return term.write(
-            langobject.packages.add.replace("{{NAME}}", package_name)
+            langobject.packages.add.replace("{{NAME}}", package_name) + "\r\n"
           );
 
         } else if (event_params[1] == "remove") {
@@ -438,7 +438,7 @@ app.ws("/ws/:language", (ws, req) => {
           ws.send("\r\nRemoving " + package_name + "...\r\n");
 
           return term.write(
-            langobject.packages.remove.replace("{{NAME}}", package_name)
+            langobject.packages.remove.replace("{{NAME}}", package_name) + "\r\n"
           );
 
         } else if (event_params[1] == "list") {
@@ -446,7 +446,7 @@ app.ws("/ws/:language", (ws, req) => {
           ws.send("\r\nListing installed packages...\r\n");
 
           return term.write(
-            langobject.packages.list
+            langobject.packages.list + "\r\n"
           );
 
         }

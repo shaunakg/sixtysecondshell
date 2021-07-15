@@ -229,7 +229,7 @@ app.ws("/ws/_exec/:uuid", (ws, req) => {
     try {
 
       ws.send("\r\n Sorry, your process is taking too long. While we allow more than 60 seconds for shell-less processes, yours has exceeded the maximum time limit and will be killed.\r\n")
-      ws.send("To prevent this in the furture, try using more efficient code or check for bugs beforehand. Thanks!")
+      ws.send("To prevent this in the future, try using more efficient code or check for bugs beforehand. Thanks!")
       ws.send("__TERMEXIT");
 
       // Delete stored code when done
@@ -413,7 +413,11 @@ app.ws("/ws/:language", (ws, req) => {
       if (event_params[0] == "PACKAGE") {
 
         // Handle package install requests
+        console.log("Received package install request", event_params);
+
         // Event should be in format: [ "PACKAGE", <package action>, <base64 encoded package name?> ]
+        // Note: package installation is insecure, but all code runs inside the container so it's not a big problem.
+        // A user can only impact themselves by injecting code into the command.
 
         if (!langobject.packages) {
           return ws.send("\r\n" + langobject.name + " does not support packages. Want package support? Email us at hello@srg.id.au.\r\n");
@@ -462,7 +466,7 @@ app.ws("/ws/:language", (ws, req) => {
 	timeout = setTimeout(() => {
 
     try {
-      ws.send("\r\n:) Your sixty seconds has expired. See you next time!\n")
+      ws.send("\r\n:) Your sixty seconds has expired. See you next time!\r\n")
       ws.send("__TERMEXIT");
       term.kill()
       return ws.close();

@@ -1,4 +1,13 @@
 
+welcome_msg = """
+=== Welcome to SixtySecondShell Interactive Terminal ===
+
+NOTE: Navigate to https://sixtysecondshell.srg.id.au to access the full range of features,
+including network access and an interactive package manager. For operational safety, network
+access is disabled on the interactive terminal.
+
+"""
+
 import json
 langs = []
 
@@ -7,7 +16,7 @@ with open("languages.config.json", "r") as f:
 
 langs = list(filter(lambda x: not x['noshell'], langs))
 
-print("=== Welcome to SixtySecondShell ===\n")
+print(welcome_msg)
 print("Please choose a language:")
 
 for i, v in enumerate(langs):
@@ -29,7 +38,7 @@ while True:
 
             if lang['noshell']:
                 print("Sorry, the chosen language does not have a shell. You can access a code editor and use this language at https://sixtysecondshell.srg.id.au.")
-                print("__ITEM_EXIT|FAILURE|{success:false}");
+                print("__ITEM_EXIT|FAILURE|{success:false}")
                 exit()
 
             print("\nYour language choice has been noted. Please wait while a container is provisioned...")

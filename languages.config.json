@@ -253,7 +253,7 @@
       "script": "./langs/esolangs/_esolang_generic",
       "description": "Bash is a shell scripting language that is used for system administration and for running many applications.",
       "image": "images/langs/bash.png",
-      "noshell": false,
+      "noshell": true,
       "hello_world": "echo \"Hello, World!\"",
       "args": [
         "bash"
@@ -266,7 +266,7 @@
       "script": "./langs/esolangs/_esolang_generic",
       "description": "Ruby is a dynamic, open source programming language with a focus on simplicity and productivity.",
       "image": "images/langs/ruby.png",
-      "noshell": false,
+      "noshell": true,
       "hello_world": "puts \"Hello, World!\"",
       "args": [
         "ruby"
@@ -279,7 +279,7 @@
       "script": "./langs/esolangs/_esolang_generic",
       "description": "Perl is a high-level, general-purpose, interpreted, dynamic programming language.",
       "image": "images/langs/perl.png",
-      "noshell": false,
+      "noshell": true,
       "hello_world": "print \"Hello, World!\"",
       "args": [
         "perl"

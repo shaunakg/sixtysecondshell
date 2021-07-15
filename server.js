@@ -401,7 +401,7 @@ app.ws("/ws/:language", (ws, req) => {
 
 	ws.on("message", (data) => {	
 
-    if (data.startswith("__CLIENT_EVENT|")) {
+    if (data.startsWith("__CLIENT_EVENT|")) {
 
       // Handle client events
 

@@ -21,7 +21,7 @@ It's pretty simple:
   - Sometimes there is a Docker image available for your language. This is preferred, for example: `docker run -it node node` will run the NodeJS CLI from the Node image in the Docker Hub.
   - If not, you can use Alpine Linux to run the REPL. In this case, you can make your own folder and Dockerfile, then build the image and run it.
   - Note that the pseudoterminal probably will break if you try and display some type of GUI. Repl.it supports this, but we don't as yet.
-  - **Note: Docker user 'esolang' provides around 200 images of various esolangs with the same setup. Since using this is much easier than creating a build script, the `_esolang\_generic` script can be used. The server will pass in the filename of some uploaded code as an argument.`**
+  - **Note: Docker user 'esolang' provides around 200 images of various esolangs with the same setup. Since using this is much easier than creating a build script, the `_esolang_generic` script can be used. The server will pass in the filename of some uploaded code as an argument.`**
 5. As stated in step 2, put a reference to your script in `languages.config.js`
 6. Make a descriptive pull request and double check that you've followed the steps above.
 

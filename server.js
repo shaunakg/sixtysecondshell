@@ -401,11 +401,11 @@ app.ws("/ws/:language", (ws, req) => {
 
 	ws.on("message", (data) => {	
 
-    if (message.startswith("__CLIENT_EVENT|")) {
+    if (data.startswith("__CLIENT_EVENT|")) {
 
       // Handle client events
 
-      event_params = message.split("|");
+      event_params = data.split("|");
       event_params.shift();
 
       if (event_params[0] == "PACKAGE") {

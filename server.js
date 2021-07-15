@@ -417,7 +417,7 @@ app.ws("/ws/:language", (ws, req) => {
         }
 
         // Decode Base64 encoded event_params[2]
-        let package_name = new Buffer(event_params[2], "base64").toString();
+        let package_name = Buffer.from(event_params[2], "base64").toString();
 
         if (event_params[1] == "add") {
 

@@ -7,7 +7,8 @@
       "noshell": false,
       "packages": {
         "add": "import os; os.system(\"pip3 install {{NAME}}\");",
-        "remove": "import os; os.system(\"pip3 uninstall {{NAME}}\");"
+        "remove": "import os; os.system(\"pip3 uninstall {{NAME}}\");",
+        "list":"import os; os.system(\"pip3 list\");"
       }
     },
 
@@ -24,7 +25,8 @@
       "hidden": false,
       "packages": {
         "add": "import os; os.system(\"pip3 install {{NAME}}\");",
-        "remove": "import os; os.system(\"pip3 uninstall {{NAME}}\");"
+        "remove": "import os; os.system(\"pip3 uninstall {{NAME}}\");",
+        "list": "import os; os.system(\"pip3 list\");"
       }
     },
 
@@ -41,15 +43,25 @@
       "script": "./langs/ruby",
       "description": "[Wikipedia] Ruby is an interpreted, high-level, general-purpose programming language.",
       "image": "images/langs/ruby.png",
-      "noshell": false
+      "noshell": false,
+      "packages": {
+        "add": "puts `gem install {{NAME}}`",
+        "remove": "puts `gem uninstall {{NAME}}`",
+        "list": "puts `gem list`"
+      }
     },
 
     {
       "name": "Node.JS",
       "script": "./langs/node",
-      "description": "Node.JS is a popular language for writing web servers and programs. Note: We have temporarily disabled internet access on our containers, and you may not be able to access some modules.",
+      "description": "Node.JS is a popular language for writing web servers and programs.",
       "image": "images/langs/node.png",
-      "noshell": false
+      "noshell": false,
+      "packages": {
+        "add": "const { exec } = require('child_process'); exec('npm install {{NAME}}', console.log);",
+        "remove": "const { exec } = require('child_process'); exec('npm uninstall {{NAME}}', console.log);",
+        "list": "const { exec } = require('child_process'); exec('npm list --depth=0', console.log);"
+      }
     },
 
     {
@@ -189,7 +201,12 @@
       "args": [
         "rust"
       ],
-      "hidden": false
+      "hidden": false,
+      "packages": {
+        "add": "use std::process::Command; let output=Command.new(\"cargo install {{NAME}}\"); println!(output.status);",
+        "remove": "use std::process::Command; let output=Command.new(\"cargo uninstall {{NAME}}\"); println!(output.status);",
+        "list": "use std::process::Command; let output=Command.new(\"cargo install --list\"); println!(output.stdout);"
+      }
     },
 
     {
@@ -214,19 +231,6 @@
       "hello_world": "print(\"Hello, World!\")",
       "args": [
         "swift"
-      ],
-      "hidden": false
-    },
-
-    {
-      "name": "Java",
-      "script": "./langs/esolangs/_esolang_generic",
-      "description": "Java is a general-purpose, class-based, interpreted programming language developed by Oracle Corporation and the open-source community.",
-      "image": "images/langs/java.png",
-      "noshell": true,
-      "hello_world": "System.out.println(\"Hello, World!\");",
-      "args": [
-        "java"
       ],
       "hidden": false
     },

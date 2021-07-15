@@ -51,7 +51,8 @@ app.get("/meta/languages", (req, res) => {
     languages.map(x => ({
       ...x,
       script: null, // Remove sensitive keys
-      args: null // Remove sensitive keys
+      args: null, // Remove sensitive keys
+      packages: x.packages ? true : false
     }))
   );
 
@@ -399,6 +400,54 @@ app.ws("/ws/:language", (ws, req) => {
   })
 
 	ws.on("message", (data) => {	
+
+    if (message.startswith("__CLIENT_EVENT|")) {
+
+      // Handle client events
+
+      event_params = message.split("|");
+      event_params.shift();
+
+      if (event_params[0] == "PACKAGE") {
+
+        // Handle package install requests
+
+        if (!langobject.packages) {
+          return ws.send("\r\n" + langobject.name + " does not support packages. Want package support? Email us at hello@srg.id.au.\r\n");
+        }
+
+        // Decode Base64 encoded event_params[2]
+        let package_name = new Buffer(event_params[2], "base64").toString();
+
+        if (event_params[1] == "add") {
+
+          ws.send("\r\nInstalling " + package_name + "...\r\n");
+
+          return term.write(
+            langobject.packages.add.replace("{{NAME}}", package_name)
+          );
+
+        } else if (event_params[1] == "remove") {
+
+          ws.send("\r\nRemoving " + package_name + "...\r\n");
+
+          return term.write(
+            langobject.packages.remove.replace("{{NAME}}", package_name)
+          );
+
+        } else if (event_params[1] == "list") {
+
+          ws.send("\r\nListing installed packages...\r\n");
+
+          return term.write(
+            langobject.packages.list.replace("{{NAME}}", package_name)
+          );
+
+        }
+
+      }
+
+    }
 
 		return term.write(data);
 

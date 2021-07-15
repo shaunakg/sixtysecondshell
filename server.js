@@ -403,6 +403,8 @@ app.ws("/ws/:language", (ws, req) => {
 
     if (data.startsWith("__CLIENT_EVENT|")) {
 
+      console.log("Received client event", data);
+
       // Handle client events
 
       event_params = data.split("|");
@@ -411,15 +413,16 @@ app.ws("/ws/:language", (ws, req) => {
       if (event_params[0] == "PACKAGE") {
 
         // Handle package install requests
+        // Event should be in format: [ "PACKAGE", <package action>, <base64 encoded package name?> ]
 
         if (!langobject.packages) {
           return ws.send("\r\n" + langobject.name + " does not support packages. Want package support? Email us at hello@srg.id.au.\r\n");
         }
 
-        // Decode Base64 encoded event_params[2]
-        let package_name = Buffer.from(event_params[2], "base64").toString();
-
         if (event_params[1] == "add") {
+
+          // Decode Base64 encoded event_params[2]
+          let package_name = Buffer.from(event_params[2], "base64").toString();
 
           ws.send("\r\nInstalling " + package_name + "...\r\n");
 
@@ -428,6 +431,9 @@ app.ws("/ws/:language", (ws, req) => {
           );
 
         } else if (event_params[1] == "remove") {
+
+          // Decode Base64 encoded event_params[2]
+          let package_name = Buffer.from(event_params[2], "base64").toString();
 
           ws.send("\r\nRemoving " + package_name + "...\r\n");
 

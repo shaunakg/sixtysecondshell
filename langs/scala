@@ -3,4 +3,4 @@
 ## See ./python for comments
 ## This file will launch a Docker container with a Scala interactive shell running
 
-docker run -it --rm --network none hseeberger/scala-sbt:8u222_1.3.5_2.13.1 scala
+docker run -it --rm hseeberger/scala-sbt:8u222_1.3.5_2.13.1 scala

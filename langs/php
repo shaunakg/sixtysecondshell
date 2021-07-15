@@ -3,4 +3,4 @@
 ## See ./python for comments
 ## This file will launch a Docker container with a PHP interactive shell running
 
-docker run --rm -it --network none php php -a
+docker run --rm -it php php -a

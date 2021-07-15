@@ -20,7 +20,7 @@ It's pretty simple:
   - Provide an honest and informative description. Wikipedia is OK.
 3. Make a build script in `langs/`. Make sure that at the end of your script, there will be a terminal running to the language of your choice. This will be passed to the user. Note that any debug output in the script will also be displayed, docker output is OK but if you don't want it, create a child script and run it while piping stdout and stderr to null.
   - Make sure your `docker run` includes the option `-ti`, for **i**nteractive **t**ty
-  - Sometimes there is a Docker image available for your language. This is preferred, for example: `docker run -it --network none node node` will run the NodeJS CLI from the Node image in the Docker Hub.
+  - Sometimes there is a Docker image available for your language. This is preferred, for example: `docker run -it node node` will run the NodeJS CLI from the Node image in the Docker Hub.
   - If not, you can use Alpine Linux to run the REPL. In this case, you can make your own folder and Dockerfile, then build the image and run it.
   - Note that we are currently disabling network for all images. This is done with `--network none`. This will stay in place until a work around is found to prevent access of EC2 metadata. If you know one, feel free to pull request.
   - Note that the pseudoterminal probably will break if you try and display some time of GUI. Repl.it supports this, but we don't as yet.

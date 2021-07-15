@@ -3,4 +3,4 @@
 ## See ./python for comments
 ## This file will launch a Docker container with a Java interactive shell running
 
-docker run --rm -it --network none adoptopenjdk/openjdk11:alpine-slim jshell
+docker run --rm -it adoptopenjdk/openjdk11:alpine-slim jshell

@@ -16,7 +16,7 @@ echo
 
 # Note that since this is docker-in-docker, we make the volume reference relative to the HOST machine.
 # Not a great solution, temporary until refactor.
-docker run --rm -v "/home/ec2-user/sixtysecondshell/__code_store":/root/__code_store -it --network none "esolang/${LANG}" "${LANG}" "__code_store/$1"
+docker run --rm -v "/home/ec2-user/sixtysecondshell/__code_store":/root/__code_store -it "esolang/${LANG}" "${LANG}" "__code_store/$1"
 
 echo
 echo "=== S3 runtime ended. ==="

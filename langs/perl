@@ -3,4 +3,4 @@
 ## See ./python for comments
 ## This file will launch a Docker container with a Perl interactive shell running
 
-docker run --rm -it --network none perl:slim perl -de1
+docker run --rm -it perl:slim perl -de1

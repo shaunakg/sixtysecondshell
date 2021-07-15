@@ -3,4 +3,4 @@
 ## See ./python for comments
 ## This file will launch a Docker container with NodeJS interactive shell running
 
-docker run --rm -it --network none node node
+docker run --rm -it node node

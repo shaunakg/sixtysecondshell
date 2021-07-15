@@ -4,8 +4,13 @@
       "script": "./langs/python",
       "description": "Python is a high-level language that is great for beginner users. Recommended, as you can probably do the most in 60 seconds out of any other.",
       "image": "images/langs/python.png",
-      "noshell": false
+      "noshell": false,
+      "packages": {
+        "add": "import os; os.system(\"pip3 install {{NAME}}\");",
+        "remove": "import os; os.system(\"pip3 uninstall {{NAME}}\");"
+      }
     },
+
     {
       "name": "Python3 (with editor)",
       "script": "./langs/esolangs/_esolang_generic",
@@ -16,8 +21,13 @@
         "python3"
       ],
       "hello_world": "print(\"Hello World!\")",
-      "hidden": false
+      "hidden": false,
+      "packages": {
+        "add": "import os; os.system(\"pip3 install {{NAME}}\");",
+        "remove": "import os; os.system(\"pip3 uninstall {{NAME}}\");"
+      }
     },
+
     {
       "name": "Bash",
       "script": "./langs/bash",
@@ -25,6 +35,7 @@
       "image": "images/langs/bash.png",
       "noshell": false
     },
+
     {
       "name": "Ruby",
       "script": "./langs/ruby",
@@ -32,6 +43,7 @@
       "image": "images/langs/ruby.png",
       "noshell": false
     },
+
     {
       "name": "Node.JS",
       "script": "./langs/node",
@@ -39,6 +51,7 @@
       "image": "images/langs/node.png",
       "noshell": false
     },
+
     {
       "name": "Java",
       "script": "./langs/java",
@@ -46,6 +59,7 @@
       "image": "images/langs/java.png",
       "noshell": false
     },
+
     {
       "name": "MySQL",
       "script": "./langs/mysql",
@@ -53,6 +67,7 @@
       "image": "images/langs/mysql.png",
       "noshell": false
     },
+
     {
       "name": "PHP",
       "script": "./langs/php",
@@ -60,6 +75,7 @@
       "image": "images/langs/php.png",
       "noshell": false
     },
+
     {
       "name": "Perl",
       "script": "./langs/perl",
@@ -67,6 +83,7 @@
       "image": "images/langs/perl.png",
       "noshell": false
     },
+
     {
       "name": "Evil",
       "script": "./langs/esolangs/_esolang_generic",
@@ -78,6 +95,7 @@
       ],
       "noshell": true
     },
+
     {
       "name": "EmojiCode",
       "script": "./langs/esolangs/_esolang_generic",
@@ -89,6 +107,7 @@
       ],
       "noshell": true
     },
+
     {
       "name": "PowerShell",
       "script": "./langs/powershell",
@@ -98,6 +117,7 @@
       "hello_world": null,
       "args": null
     },
+
     {
       "name": "FetLang",
       "script": "./langs/esolangs/_esolang_generic",
@@ -110,6 +130,7 @@
       ],
       "hidden": true
     },
+
     {
       "name": "Scala",
       "script": "./langs/scala",
@@ -120,6 +141,7 @@
       "args": null,
       "hidden": false
     },
+
     {
       "name": "ArnoldC",
       "script": "./langs/esolangs/arnoldc",
@@ -130,6 +152,7 @@
       "args": null,
       "hidden": true
     },
+
     {
       "name": "Fish (><>)",
       "script": "./langs/esolangs/_esolang_generic",
@@ -142,6 +165,7 @@
       ],
       "hidden": false
     },
+
     {
       "name": "COBOL",
       "script": "./langs/esolangs/_esolang_generic",
@@ -154,6 +178,7 @@
       ],
       "hidden": false
     },
+
     {
       "name": "Rust",
       "script": "./langs/esolangs/_esolang_generic",
@@ -166,6 +191,7 @@
       ],
       "hidden": false
     },
+
     {
       "name": "Lua",
       "script": "./langs/esolangs/_esolang_generic",
@@ -178,6 +204,7 @@
       ],
       "hidden": false
     },
+
     {
       "name": "Swift",
       "script": "./langs/esolangs/_esolang_generic",
@@ -189,5 +216,71 @@
         "swift"
       ],
       "hidden": false
+    },
+
+    {
+      "name": "Java",
+      "script": "./langs/esolangs/_esolang_generic",
+      "description": "Java is a general-purpose, class-based, interpreted programming language developed by Oracle Corporation and the open-source community.",
+      "image": "images/langs/java.png",
+      "noshell": true,
+      "hello_world": "System.out.println(\"Hello, World!\");",
+      "args": [
+        "java"
+      ],
+      "hidden": false
+    },
+
+    {
+      "name": "Kotlin",
+      "script": "./langs/esolangs/_esolang_generic",
+      "description": "Kotlin is a statically-typed, multi-paradigm programming language developed by JetBrains. It is a general-purpose language with object-oriented, functional, and actor-like features.",
+      "image": "images/langs/kotlin.png",
+      "noshell": true,
+      "hello_world": "println(\"Hello, World!\")",
+      "args": [
+        "kotlin"
+      ],
+      "hidden": false
+    },
+
+    {
+      "name": "Bash (with editor)",
+      "script": "./langs/esolangs/_esolang_generic",
+      "description": "Bash is a shell scripting language that is used for system administration and for running many applications.",
+      "image": "images/langs/bash.png",
+      "noshell": false,
+      "hello_world": "echo \"Hello, World!\"",
+      "args": [
+        "bash"
+      ],
+      "hidden": false
+    },
+
+    {
+      "name": "Ruby (with editor)",
+      "script": "./langs/esolangs/_esolang_generic",
+      "description": "Ruby is a dynamic, open source programming language with a focus on simplicity and productivity.",
+      "image": "images/langs/ruby.png",
+      "noshell": false,
+      "hello_world": "puts \"Hello, World!\"",
+      "args": [
+        "ruby"
+      ],
+      "hidden": false
+    },
+
+    {
+      "name": "Perl (with editor)",
+      "script": "./langs/esolangs/_esolang_generic",
+      "description": "Perl is a high-level, general-purpose, interpreted, dynamic programming language.",
+      "image": "images/langs/perl.png",
+      "noshell": false,
+      "hello_world": "print \"Hello, World!\"",
+      "args": [
+        "perl"
+      ],
+      "hidden": false
     }
+
 ]

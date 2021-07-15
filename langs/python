@@ -5,4 +5,4 @@
 
 # Network is disabled until I find a workaround to use iptables in Alpine, otherwise one could grab EC2 metadata
 
-docker run --rm -it --network none python python
+docker run --rm -it python python

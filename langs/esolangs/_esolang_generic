@@ -1,13 +1,13 @@
 #!/bin/sh
 
-## SixtySecondShell generic esolang launh script
+## SixtySecondShell generic esolang launch script
 
 ## This file will launch a Docker container with the esolang/$2 image, running $2.
 # Note that $2 is the second argument passed into the script, the first being the file name of the script.
 
 # The server will pass us the file name, which we will pass to the container
 
-# For convienience
+# For convenience
 LANG="$2"
 
 echo "=== SixtySecondShell Shell-Less Execution Runtime ==="

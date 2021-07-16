@@ -285,6 +285,18 @@
         "perl"
       ],
       "hidden": false
+    },
+
+    {
+      "name": "Wolfram Language",
+      "script": "./langs/wolframlanguage",
+      "description": "Wolfram Language is a programming language for numerical computation and scientific computing.",
+      "image": "images/langs/wolframlanguage.png",
+      "noshell": false,
+      "hello_world": "Print[\"Hello, World!\"]",
+      "args": null,
+      "packages": null,
+      "hidden": false
     }
 
 ]
